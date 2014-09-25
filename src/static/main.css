@@ -1,0 +1,20 @@
+.box
+{
+    margin-top:20px;
+    margin-bottom:20px;
+    max-width:10024px;
+    height:600px;
+    
+    padding: 10px;
+    background-color: #EEE;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    
+    text-align:center;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 36px;
+    
+    overflow:hidden;
+}
