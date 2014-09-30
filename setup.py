@@ -6,9 +6,9 @@ setup(
     author='Emiliano Dalla Verde Marcozzi <edvm@fedoraproject.org>',
     version='0.1',
     package_dir={'': 'src'},
+    package_data={'': ['templates/*', 'static/*']},
     packages=[''],
-    entry_points={
-        'console_scripts': [
-            'pysenteishon = src.web:run_pysenteishon']
-    }
+    scripts=[
+        'scripts/pysenteishon',
+    ]
 )
