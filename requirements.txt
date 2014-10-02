@@ -1,3 +1,0 @@
-Flask==0.10.1
-PyUserInput==0.1.9
-python3-xlib
