@@ -53,16 +53,16 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">About</a>
+                        <a class="page-scroll" href="#about"><i class="fa fa-user fa-fw"></i> About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#download">Download</a>
+                        <a class="page-scroll" href="#download"><i class="fa fa-save fa-fw"></i> Download</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#thanks">Thanks</a>
+                        <a class="page-scroll" href="#thanks"><i class="fa fa-heart fa-fw"></i> Thanks</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll" href="#contact"><i class="fa fa-envelope fa-fw"></i> Contact</a>
                     </li>
                 </ul>
             </div>
@@ -104,9 +104,12 @@
             		</div>
             		<div class="col-lg-6" style="text-align:justify;">
             			<h2>How to use it</h2>
-            			<p>Run <i>pysenteishon</i> in your laptop. If you have a firewall running, be sure to allow connections on port <i>5000</i>.
-            			In your smartphone, open the <i>url</i> given by <i>pysenteishon</i>.<p>
-            			<i>Swipe</i> your finger at the <i>touchscreen</i> to control your slides and start your talk/presentation!</p>
+            			<p>Run <i>pysenteishon</i> in your laptop. If you have a firewall running, be sure to allow connections on port <i>5000</i>. Then
+            			open your presentation with the software you used to, be sure the application has focus.
+            			In your smartphone, open the <i>url</i> given by <i>pysenteishon</i>.
+            			<i>Swipe</i> your finger at the <i>touchscreen</i> to control your slides and start your talk/presentation!
+            			For further instructions, click on the following ninja assistant >>> </p>
+            			<center><img src="img/system_ninja.png" width="120" height="120" alt=""></center>
             		</div>
             	</div>
             </div>
@@ -127,15 +130,35 @@
             </div>
         </div>
     </section>
+    
+    <!-- Thanks Section -->
+    <section id="thanks" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2" style="text-align:left;">
+                <h2>Thanks to</h2>
+                <p><a href="http://diegosarmentero.org/" target="_blank" class="btn btn-default btn-small">Diego Sarmentero</a> for given feedback, testing and created the Ubuntu PPA</p>
+                <p><a href="https://github.com/mattbryson" target="_blank" class="btn btn-default btn-small">Matt Bryson</a> for the cool <a href="https://github.com/mattbryson/TouchSwipe-Jquery-Plugin">TouchSwipe</a> javascript library</p>
+                <p><a href="https://github.com/SavinaRoja" target="_blank" class="btn btn-default btn-small">Paul Barton</a> for the awsome <a href="https://github.com/SavinaRoja/PyUserInput">PyUserInput</a> Python library</p>
+                </p>
+                <ul class="list-inline banner-social-buttons">
+                    <li>
+                        <a href="http://pyar.org.ar/" class="btn btn-default btn-lg"><i class="fa fa-heart fa-fw"></i> <span class="network-name">PyAr Community</span></a>
+                    </li>
+                    <li>
+                        <a href="https://fedoraproject.org/wiki/Fedora-Argentina" class="btn btn-default btn-lg"><i class="fa fa-heart fa-fw"></i> <span class="network-name">Fedora Argentina</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Contact me</h2>
-                <p>My name is Emiliano Dalla Verde Marcozzi. Feel free to email me to provide feedback, give suggestions, ask for features, or to just say hello!</p>
-                <p><a href="mailto:edvm@fedoraproject.org">edvm@fedoraproject.org</a>
-                </p>
+                <p>My name is Emiliano Dalla Verde Marcozzi. Feel free to email me to provide feedback, give suggestions, ask for features, or just to say hello!</p>
+                <p><a href="mailto:edvm@fedoraproject.org">edvm@fedoraproject.org</a></p>
                 <ul class="list-inline banner-social-buttons">
                     <li>
                         <a href="https://twitter.com/edvm" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
@@ -144,6 +167,15 @@
                         <a href="https://github.com/edvm" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                     </li>
                 </ul>
+                <p></p>
+                <h2>Invite me a beer</h2>
+                <p>If you feel you want to invite me a beer, go on! I'll really appreciate it!</p>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                   <input type="hidden" name="cmd" value="_s-xclick">
+                   <input type="hidden" name="hosted_button_id" value="2FMJXY5S5733C">
+                   <input type="image"  src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                   <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
             </div>
         </div>
     </section>
@@ -154,7 +186,7 @@
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p>Copyright &copy; Your Website 2014</p>
+            <p></p>
         </div>
     </footer>
 
@@ -172,6 +204,18 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-55415325-1', 'auto');
+  ga('send', 'pageview');
+
+   </script>
 
 </body>
 
