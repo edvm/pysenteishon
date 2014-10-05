@@ -8,7 +8,6 @@ k = PyKeyboard()
 @app.route('/')
 def pysenteishon():
     ip_addresses = get_local_ip_addresses()
-    #ip_addresses = ', '.join(('http://%s:5000' % ip for ip in ip_addresses))
     return render_template('index.html', ip_addresses=ip_addresses)
 
 
