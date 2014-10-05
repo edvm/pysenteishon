@@ -10,6 +10,10 @@
 <body>
   <div class="container">
     <div id="touche" class="row box">
+        Open your smartphone on:
+        {% for ip_address in ip_addresses %}
+          <p>http://{{ ip_address }}:5000</p>
+        {% endfor %}
     </div>
   </div>
   <script src="/static/pysenteishon.js"></script>
