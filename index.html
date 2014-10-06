@@ -32,6 +32,35 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+	<!-- Download Windows EXE Modal -->
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Pysenteishon for Windows Vista/7/8</h4>
+	      </div>
+	      <div class="modal-body">
+   			<ol>
+  					<li>Download <b>Pysenteishon.exe</b></li>
+  					<li>Double click <b>Pysenteishon.exe</b>, you will be asked to choose a directory where to extract</li>
+  					<li>Go to the extracted directory and execute <b>pysenteishon.bat</b> . A <i>windows command terminal</i> (black screen with text) will be executed, leave it open since if you
+  					close this windows, you will close <i>Pysenteishon</i>.If the <i>windows firewall</i> ask you to allow connection, say <b>yes</b>.</li>
+  					<li>Open your web browser and go to: <b>http://127.0.0.1:5000</b> .</b> You will be given an <b>url</b> you need to connect from your <b>smartphone</b>.</li>
+  					<li>Open a web browser in your <b>smartphone</b> and go to the <b>url</b> provided in the step before</b></li>
+  					<li>Open your slides with the software you prefer and put them in <i>presentation mode</i> (for example in Powerpoint is <kbd>F5</kbd>) </b>. You can find a sample
+  					presentation to try <a href="https://github.com/edvm/pysenteishon/raw/master/samples/pysenteishon.pdf">here</a></li>
+  					<li>Thats all! <i>Swipe</i> your finger at your <i>smartphone touchscreen</i>! To close Pysenteishon, simple close the <i>windows command terminal</i> (black screen with text)</li>
+				</ol>
+	      </div>
+   	   <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <a href="https://drive.google.com/file/d/0B_XLt7gm_BcbbTI2WUtWLWlWMlU/view?usp=sharing" target="_blank" class="btn btn-default btn-lg">Download</a>
+	      </div>
+    	</div>
+  	</div>
+	</div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -126,6 +155,10 @@
                     <a href="http://github.com/edvm/pysenteishon" target="_blank" class="btn btn-default btn-lg">Get the code</a>
                     <a href="#" class="btn btn-default btn-lg">Ubuntu PPA</a>
                     <a href="#" class="btn btn-default btn-lg">RPM Package</a>
+                    <!-- Button trigger modal -->
+							<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+			  					Windows EXE
+							</button>
                 </div>
             </div>
         </div>
@@ -140,10 +173,11 @@
                 <p><a href="https://github.com/mattbryson" target="_blank" class="btn btn-default btn-small">Matt Bryson</a> for the cool <a href="https://github.com/mattbryson/TouchSwipe-Jquery-Plugin">TouchSwipe</a> javascript library</p>
                 <p><a href="https://github.com/SavinaRoja" target="_blank" class="btn btn-default btn-small">Paul Barton</a> for the awesome <a href="https://github.com/SavinaRoja/PyUserInput">PyUserInput</a> Python library</p>
                 </p>
-                <p><a href="https://github.com/tzenderman" target="_blank" class="btn btn-default btn-small">Tim Zenderman</a> for some feedback and copyrighting.</p>
+                <p><a href="https://github.com/tzenderman" target="_blank" class="btn btn-default btn-small">Tim Zenderman</a> for some feedback and copyrighting</p>
+                <p><a href="#" target="_blank" class="btn btn-default btn-small"><i class="fa fa-heart fa-fw"></i> Marcela Bertolio</a> for your patience, love, and support
                 <ul class="list-inline banner-social-buttons">
                     <li>
-                        <a href="http://pyar.org.ar/" class="btn btn-default btn-lg"><i class="fa fa-heart fa-fw"></i> <span class="network-name">PyAr Community</span></a>
+                        <a href="http://pyar.org.ar/" class="btn btn-default btn-lg"><i class="fa fa-heart fa-fw"></i> <span class="network-name">Python Argentina</span></a>
                     </li>
                     <li>
                         <a href="https://fedoraproject.org/wiki/Fedora-Argentina" class="btn btn-default btn-lg"><i class="fa fa-heart fa-fw"></i> <span class="network-name">Fedora Argentina</span></a>
