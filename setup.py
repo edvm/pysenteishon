@@ -6,7 +6,17 @@ setup(
     author='Emiliano Dalla Verde Marcozzi <edvm@fedoraproject.org>',
     version='0.1',
     package_dir={'': 'src'},
-    package_data={'': ['templates/*', 'static/*']},
+    package_data={
+        '': [
+            'templates/*',
+            'static/*.js',
+            'static/*.css',
+            'static/font-awesome/css/*',
+            'static/font-awesome/scss/*',
+            'static/font-awesome/less/*',
+            'static/font-awesome/fonts/*',
+        ]
+    },
     packages=[''],
     scripts=[
         'scripts/pysenteishon',
