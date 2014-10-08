@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env python
 # Run pysenteishon Flask web app
 
-python3 -m web 
+python -m web 
