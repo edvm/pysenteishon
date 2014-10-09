@@ -1,8 +1,24 @@
 from flask import Flask, render_template
+from flask import jsonify as flask_jsonify
+from functools import wraps
 from pykeyboard import PyKeyboard
 import socket
 app = Flask(__name__)
 k = PyKeyboard()
+
+
+def jsonify(f):
+    @wraps(f)
+    def make_response(*args, **kwargs):
+        response = dict(status=None, msg='')
+        try:
+            f(*args, **kwargs)
+            response['status'] = True
+        except Exception as exc:
+            response['status'] = False
+            response['msg'] = str(exc)
+        return flask_jsonify(**response)
+    return make_response
 
 
 @app.route('/')
@@ -12,27 +28,27 @@ def pysenteishon():
 
 
 @app.route('/btn-up/')
+@jsonify
 def btn_up():
     k.tap_key(k.up_key)
-    return ''
 
 
 @app.route('/btn-down/')
+@jsonify
 def btn_down():
     k.tap_key(k.down_key)
-    return ''
 
 
 @app.route('/btn-right/')
+@jsonify
 def btn_right():
     k.tap_key(k.left_key)  # UX enduser experience
-    return ''
 
 
 @app.route('/btn-left/')
+@jsonify
 def btn_left():
     k.tap_key(k.right_key)  # UX enduser experience
-    return ''
 
 
 def run_pysenteishon():
