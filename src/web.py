@@ -24,7 +24,7 @@ def jsonify(f):
 @app.route('/')
 def pysenteishon():
     ip_addresses = get_local_ip_addresses()
-    return render_template('index.html', ip_addresses=ip_addresses)
+    return render_template('index.html', ips=ip_addresses)
 
 
 @app.route('/btn-up/')
@@ -42,6 +42,7 @@ def btn_down():
 @app.route('/btn-right/')
 @jsonify
 def btn_right():
+    1/0
     k.tap_key(k.left_key)  # UX enduser experience
 
 
