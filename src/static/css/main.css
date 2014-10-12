@@ -14,7 +14,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     font-weight: 300;
     font-size: 20px;
-    height: 800px;
+    height: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
     max-width: 10024px;
