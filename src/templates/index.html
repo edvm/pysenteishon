@@ -44,6 +44,8 @@
             {% else %}
               At your smartphone execute a web browser and open the following url:
             {% endif %}
+            <br/>
+            <br/>
             {% for ip in local_ips %}
               <div class="network-iface">
                <p> <i class="fa fa-bolt"></i>  http://{{ ip }}:5000</p>
