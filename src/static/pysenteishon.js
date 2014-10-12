@@ -3,7 +3,9 @@ $(function() {
   $("#touche").swipe({
     //Generic swipe handler for all directions
     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-      $(this).text("You swiped " + direction );  
+      // $(this).text("You swiped " + direction );
+      var icon = '<i class="fa fa-arrow-circle-' + direction + ' fa-5x center-block"></i>';
+      $('#touche-directions').html(icon);
       var url = '/btn-' + direction + '/'
       $.ajax({
         type: 'GET',

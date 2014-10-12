@@ -42,7 +42,6 @@ def btn_down():
 @app.route('/btn-right/')
 @jsonify
 def btn_right():
-    1 / 0
     k.tap_key(k.left_key)  # UX enduser experience
 
 
