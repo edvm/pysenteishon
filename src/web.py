@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask import jsonify as flask_jsonify
 from functools import wraps
 from pykeyboard import PyKeyboard
-import socket
+import netifaces
 app = Flask(__name__)
 k = PyKeyboard()
 
@@ -23,8 +23,8 @@ def jsonify(f):
 
 @app.route('/')
 def pysenteishon():
-    ip_addresses = get_local_ip_addresses()
-    return render_template('index.html', ips=ip_addresses)
+    local_ips = get_local_ip_addresses()
+    return render_template('index.html', local_ips=local_ips)
 
 
 @app.route('/btn-up/')
@@ -56,7 +56,16 @@ def run_pysenteishon():
 
 
 def get_local_ip_addresses():
-    return [ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")]
+    local_ips = []
+    interfaces = netifaces.interfaces()
+    for interface in interfaces:
+        if interface == 'lo':
+            continue
+        iface = netifaces.ifaddresses(interface).get(netifaces.AF_INET)
+        if iface != None:
+            for x in iface:
+                local_ips.append(x['addr'])
+    return local_ips
 
 
 if __name__ == '__main__':

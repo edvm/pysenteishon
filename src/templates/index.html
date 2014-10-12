@@ -35,15 +35,24 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel">Connection Settings</h4>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-wifi"></i> Network Settings</h4>
           </div>
           <div class="modal-body">
-            Open in your mobile phone a web browser and use one of the following urls:
-            {% for ip in ip_addresses %}
-              http://{{ip}}:5000
+            {% if local_ips|length > 1 %}
+              At your smartphone execute a web browser and open one of the following urls:
+            {% else %}
+              At your smartphone execute a web browser and open the following url:
+            {% endif %}
+            {% for ip in local_ips %}
+              <div class="network-iface">
+               <p> <i class="fa fa-bolt"></i>  http://{{ ip }}:5000</p>
+              </div>
             {% endfor %}
           </div>
           <div class="modal-footer">
+            <div>
+              <p>Remember to allow connections on port 5000</p>
+            </div>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -51,7 +60,7 @@
     </div>
 
 
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default nice-background" role="navigation">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -61,13 +70,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Pysenteishon</a>
+          <a class="navbar-brand" href="#">PYSENTEISHON</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
          <ul class="nav navbar-nav">
-            <li><a href="javascript:$('#connection-settings-modal').modal();" data-toggle="modal" data-target="#connection-settings-modal">Connection settings</a></li>
+            <li><a href="javascript:$('#connection-settings-modal').modal();" data-toggle="modal" data-target="#connection-settings-modal"><i class="fa fa-wifi"></i> Network settings</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
