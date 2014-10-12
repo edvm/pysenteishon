@@ -16,7 +16,7 @@ $(function() {
         },
         success: function ( data, textStatus, jqXHR ){
           if ( data.status == false ){
-            show_error_modal(title='Error', body=data.msg, show=true);
+            show_error_modal(title='Error', titleIcon='warning', body=data.msg, show=true);
           }
         }
       });
@@ -26,7 +26,9 @@ $(function() {
   });
 
   // utilities
-  function show_error_modal (title='', body='', show=false) {
+  function show_error_modal (title='', titleIcon=false, body='', show=false) {
+    if ( titleIcon !== false )
+      title = '<i class="fa fa-' + titleIcon + '">' + ' ' + title;
     $('#error-modal .modal-title').html(title);
     $('#error-modal .modal-body').html(body);
     if ( show === true ){
