@@ -32,14 +32,14 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-	<!-- Download Windows EXE Modal -->
 
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<!-- Download Windows EXE Modal -->
+	<div class="modal fade" id="download-modal-windows" tabindex="-1" role="dialog" aria-labelledby="download-modal-windows" aria-hidden="true">
   	<div class="modal-dialog">
     	<div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Pysenteishon for Windows Vista/7/8</h4>
+	        <h4 class="modal-title" id="download-modal-windows">Pysenteishon for Windows Vista/7/8</h4>
 	      </div>
 	      <div class="modal-body">
    			<ol>
@@ -57,6 +57,35 @@
    	   <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        <a href="https://drive.google.com/file/d/0B_XLt7gm_BcbTi1ORC13eEhKZXc/view?usp=sharing" target="_blank" class="btn btn-default btn-lg">Download</a>
+	      </div>
+    	</div>
+  	</div>
+  </div> <!--/ Windwos download modal -->
+
+	<!-- Download Linux 64 Modal -->
+	<div class="modal fade" id="download-modal-linux" tabindex="-1" role="dialog" aria-labelledby="download-modal-linux" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="download-modal-linux">Pysenteishon for Gnu/Linux 64 bits</h4>
+	      </div>
+	      <div class="modal-body">
+   			<ol>
+  					<li>Download <b>pysenteishon-linux-x86_64-3.4.tar.gz</b></li>
+            <li>Untar pysenteishon <kbd>tar -zxvf pysenteishon-linux-x86_64-3.4.tar.gz</kbd></li>
+            <li>Change directory into the extracted directory <kbd>cd pysenteishon-linux-x86_64-3.4</kbd></li>
+            <li>Execute pysenteishon script <kbd>./pysenteishon</kbd> and leave it running</li>
+            <li>Open your web browser and go to: <b>http://127.0.0.1:5000</b> .</b> Click on <b>Network settings</b>, You will be given an <b>url</b> you need to connect from your <b>smartphone</b>. Be sure to allow connections on port 5000.</li>
+  					<li>Open a web browser in your <b>smartphone</b> and go to the <b>url</b> provided in the step before</b></li>
+  					<li>Open your slides with the software you prefer and put them in <i>presentation mode</i> (for example in Powerpoint is <kbd>F5</kbd>) </b>. You can find a sample
+  					presentation to try <a href="https://github.com/edvm/pysenteishon/raw/master/samples/pysenteishon.pdf">here</a></li>
+            <li>Thats all! <i>Swipe</i> your finger at your <i>smartphone touchscreen</i>! To close Pysenteishon, simple close the <i>terminal</i></li> 
+				</ol>
+	      </div>
+   	   <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <a href="https://drive.google.com/file/d/0B_XLt7gm_BcbTzNsbl9vU3FDSGs/view?usp=sharing" target="_blank" class="btn btn-default btn-lg">Download</a>
 	      </div>
     	</div>
   	</div>
@@ -107,7 +136,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading">Pysenteishon</h1>
-                        <p class="intro-text">Gives you <img src="img/ninja.jpeg" width="64" height="64" alt=""> skillz to let you change your presentation slides with your smartphone!</p>
+                        <p class="intro-text">Gives you <img src="img/ninja.jpeg" width="64" height="64" alt=""> skills to let you change your presentation slides with your smartphone!</p>
                         <a href="#about" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
@@ -135,10 +164,9 @@
             			<h2>How to use it</h2>
             			<p>Run <i>pysenteishon</i> on your laptop. If you have a firewall running, make sure you allow connections on port <i>5000</i>. Then
             			open your presentation with the software you're used to using (like Powerpoint), and make sure that application is in focus.
-            			On your smartphone, open the <i>url</i> given by <i>pysenteishon</i>.
+                  On your smartphone, open the <i>url</i> given by <i>pysenteishon</i> (click on <i>Network settings</i>).
             			<i>Swipe</i> your finger on the <i>touchscreen</i> to control your slides and start your talk/presentation!
-            			For further information, click on the following ninja assistant >>> </p>
-            			<center><img src="img/system_ninja.png" width="120" height="120" alt=""></center>
+            		  </p>	
             		</div>
             	</div>
             </div>
@@ -153,10 +181,11 @@
                     <h2>Download Pysenteishon</h2>
                     <p>You can download Pysenteishon for free. Its free as in freedom!</p>
                     <a href="http://github.com/edvm/pysenteishon" target="_blank" class="btn btn-default btn-lg">Get the code</a>
-                    <a href="#" class="btn btn-default btn-lg">Ubuntu PPA</a>
-                    <a href="#" class="btn btn-default btn-lg">RPM Package</a>
                     <!-- Button trigger modal -->
-							<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+							<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#download-modal-linux">
+			  				  Gnu/Linux 64 bits	
+							</button>
+							<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#download-modal-windows">
 			  					Windows EXE
 							</button>
                 </div>
@@ -169,12 +198,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2" style="text-align:left;">
                 <h2>Thanks to</h2>
-                <p><a href="http://diegosarmentero.org/" target="_blank" class="btn btn-default btn-small">Diego Sarmentero</a> for feedback given, testing and creating the Ubuntu PPA</p>
-                <p><a href="https://github.com/mattbryson" target="_blank" class="btn btn-default btn-small">Matt Bryson</a> for the cool <a href="https://github.com/mattbryson/TouchSwipe-Jquery-Plugin">TouchSwipe</a> javascript library</p>
-                <p><a href="https://github.com/SavinaRoja" target="_blank" class="btn btn-default btn-small">Paul Barton</a> for the awesome <a href="https://github.com/SavinaRoja/PyUserInput">PyUserInput</a> Python library</p>
+                <p><a href="http://diegosarmentero.org/" target="_blank" class="btn btn-default btn-xs">Diego Sarmentero</a> for feedback given and testing</p> 
+                <p><a href="https://github.com/mattbryson" target="_blank" class="btn btn-default btn-xs">Matt Bryson</a> for the cool <a href="https://github.com/mattbryson/TouchSwipe-Jquery-Plugin">TouchSwipe</a> javascript library</p>
+                <p><a href="https://github.com/SavinaRoja" target="_blank" class="btn btn-default btn-xs">Paul Barton</a> for the awesome <a href="https://github.com/SavinaRoja/PyUserInput">PyUserInput</a> Python library</p>
                 </p>
-                <p><a href="https://github.com/tzenderman" target="_blank" class="btn btn-default btn-small">Tim Zenderman</a> for some feedback and copyrighting</p>
-                <p><a href="#" target="_blank" class="btn btn-default btn-small"><i class="fa fa-heart fa-fw"></i> Marcela Bertolio</a> for your patience, love, and support
+                <p><a href="https://github.com/tzenderman" target="_blank" class="btn btn-default btn-xs">Tim Zenderman</a> for some feedback and copyrighting</p>
+                <p><a href="https://github.com/jcarizza" target="_blank" class="btn btn-default btn-xs">Juan Carizza</a> for making Pysenteishon looks better</p>
+                <p><a href="#" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-heart fa-fw"></i> Marcela Bertolio</a> for your patience, love, and support
                 <ul class="list-inline banner-social-buttons">
                     <li>
                         <a href="http://pyar.org.ar/" class="btn btn-default btn-lg"><i class="fa fa-heart fa-fw"></i> <span class="network-name">Python Argentina</span></a>
