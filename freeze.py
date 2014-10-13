@@ -1,6 +1,6 @@
 from cx_Freeze import setup, Executable
 
-packages = ['jinja2']
+packages = ['jinja2', 'netifaces']
 build_exe_options = {
     "packages": packages,
     "include_files": [
