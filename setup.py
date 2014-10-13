@@ -9,8 +9,8 @@ setup(
     package_data={
         '': [
             'templates/*',
-            'static/*.js',
-            'static/*.css',
+            'static/js/*.js',
+            'static/css/*.css',
             'static/font-awesome/css/*',
             'static/font-awesome/scss/*',
             'static/font-awesome/less/*',

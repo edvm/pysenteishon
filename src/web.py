@@ -64,6 +64,9 @@ def get_local_ip_addresses():
         iface = netifaces.ifaddresses(interface).get(netifaces.AF_INET)
         if iface != None:
             for x in iface:
+                addr = x['addr']
+                if addr  == '127.0.0.1':
+                    continue
                 local_ips.append(x['addr'])
     return local_ips
 

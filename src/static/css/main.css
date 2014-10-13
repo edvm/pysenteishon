@@ -47,3 +47,8 @@
 #touche {
     text-transform: uppercase;
 }
+
+#slide-msg {
+    text-transform: uppercase;
+    text-shadow: 0px 11px 0px rgba(150, 150, 150, 0.33);
+}

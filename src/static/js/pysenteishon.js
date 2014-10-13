@@ -6,6 +6,15 @@ $(function() {
       // $(this).text("You swiped " + direction );
       var icon = '<i class="fa fa-arrow-circle-' + direction + ' fa-5x center-block"></i>';
       $('#touche-directions').html(icon);
+     if ( direction == 'right' ) {
+        $('#slide-msg h3').html('Shows previous slide!')
+      } else if ( direction == 'left' ) {
+        $('#slide-msg h3').html('Shows next slide!')
+      } else {
+        var icon = '<i class="fa fa-warning fa-5x center-block"></i>';
+        $('#touche-directions').html(icon);
+        $('#slide-msg h3').html('Not implemented option!')
+      }
       var url = '/btn-' + direction + '/'
       $.ajax({
         type: 'GET',
