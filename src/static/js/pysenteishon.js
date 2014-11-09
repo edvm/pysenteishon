@@ -10,6 +10,10 @@ $(function() {
         $('#slide-msg h3').html('Shows previous slide!')
       } else if ( direction == 'left' ) {
         $('#slide-msg h3').html('Shows next slide!')
+      } else if ( direction == 'up' ) {
+        $('#slide-msg h3').html('Pressed Key Up!')
+      } else if ( direction == 'down' ) {
+        $('#slide-msg h3').html('Pressed Key Down')
       } else {
         var icon = '<i class="fa fa-warning fa-5x center-block"></i>';
         $('#touche-directions').html(icon);
@@ -19,31 +23,10 @@ $(function() {
       $.ajax({
         type: 'GET',
         url: url,
-        dataType: 'json',
-        statusCode: {
-          500: function(jqXHR, textStatus, errorThrown){
-            show_error_modal(title='Internal server error', body=textStatus, show=true);
-          }
-        },
-        success: function ( data, textStatus, jqXHR ){
-          if ( data.status == false ){
-            show_error_modal(title='Error', titleIcon='warning', body=data.msg, show=true);
-          }
-        }
+        dataType: 'json'
       });
     },
     //Default is 75px, set to 0 for demo so any distance triggers swipe
     threshold:0
   });
-
-  // utilities
-  function show_error_modal (title='', titleIcon=false, body='', show=false) {
-    if ( titleIcon !== false )
-      title = '<i class="fa fa-' + titleIcon + '">' + ' ' + title;
-    $('#error-modal .modal-title').html(title);
-    $('#error-modal .modal-body').html(body);
-    if ( show === true ){
-      $('#error-modal').modal();
-    }
-  }
 });

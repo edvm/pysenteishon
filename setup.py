@@ -17,13 +17,12 @@ def dependencies_alright():
             from Xlib.display import Display
         except ImportError as exc:
             if is_python3():
-                print('You must install python3-xlib to use Pysenteishon')
+                print('You must install python-xlib to use Pytsenteishon')
                 print('Just type: pip install python3-xlib')
             else:
                 print('You must install python-xlib to use Pytsenteishon')
                 print('Just type: pip install svn+https://python-xlib.svn.sourceforge.net/svnroot/python-xlib/trunk/')
             return False
-
     return True
 
 
@@ -33,7 +32,7 @@ def setup():
     distutils_setup(
         name='pysenteishon',
         author='Emiliano Dalla Verde Marcozzi <edvm@fedoraproject.org>',
-        version='0.1',
+        version='0.2',
         package_dir={'': 'src'},
         package_data={
             '': [
