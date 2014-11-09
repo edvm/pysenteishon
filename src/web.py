@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask import jsonify as flask_jsonify
 from functools import wraps
 from pykeyboard import PyKeyboard
+import webbrowser
 import netifaces
 app = Flask(__name__)
 k = PyKeyboard()
@@ -42,17 +43,17 @@ def btn_down():
 @app.route('/btn-right/')
 @jsonify
 def btn_right():
-    k.tap_key(k.left_key)  # UX enduser experience
+    k.tap_key(k.left_key)  # UX
 
 
 @app.route('/btn-left/')
 @jsonify
 def btn_left():
-    k.tap_key(k.right_key)  # UX enduser experience
+    k.tap_key(k.right_key)  # UX
 
 
-def run_pysenteishon():
-    app.run(host='0.0.0.0', debug=True)
+def run_pysenteishon(IP_ADDRESS='0.0.0.0', PORT=5000, debug=True):
+    app.run(host=IP_ADDRESS, port=PORT, debug=debug)
 
 
 def get_local_ip_addresses():
@@ -72,4 +73,9 @@ def get_local_ip_addresses():
 
 
 if __name__ == '__main__':
-    run_pysenteishon()
+    IP_ADDRESS = '0.0.0.0'  # default listen in all interfaces
+    PORT = 5000  # default listen on port 5000
+    url = 'http://{host}:{port}'.format(host=IP_ADDRESS, port=PORT)
+    webbrowser.open(url)
+    print(' * Opening web browser at %s, please wait ...' % url)
+    run_pysenteishon(IP_ADDRESS, PORT, debug=False)
