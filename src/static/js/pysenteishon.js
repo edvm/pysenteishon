@@ -29,4 +29,17 @@ $(function() {
     //Default is 75px, set to 0 for demo so any distance triggers swipe
     threshold:0
   });
+
+  $(".chronometer").swipe({
+    tap:function(event, object){
+      if (chrIsRunning() == false){
+        startChr();
+      }
+    },
+    doubleTap:function(event, object){
+      resetChr();
+      stopChr();
+    },
+  });
+
 });
