@@ -49,6 +49,7 @@
             {% for ip in local_ips %}
               <div class="network-iface">
                <p> <i class="fa fa-bolt"></i>  http://{{ ip }}:5000</p>
+               <p><img src="{{ qr_code }}"/></p>
               </div>
             {% endfor %}
           </div>
@@ -152,10 +153,10 @@
         function startChr() { chrRunning = true; startchron = 1; chronometer(); }      // starts the chronometer
         function stopChr() { chrRunning = false; startchron = 0; }                      // stops the chronometer
         function chrIsRunning(){
-          return chrRunning; 
+          return chrRunning;
         }
         function resetChr() {
-          zecsec = 0;  seconds = 0; mints = 0; startchron = 0; 
+          zecsec = 0;  seconds = 0; mints = 0; startchron = 0;
           document.getElementById('showtm').innerHTML = mints+ ' : '+ seconds+ '<sub>'+ zecsec+ '</sub>';
         }
 

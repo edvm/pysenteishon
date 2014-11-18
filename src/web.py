@@ -1,9 +1,16 @@
-from flask import Flask, render_template
-from flask import jsonify as flask_jsonify
-from functools import wraps
-from pykeyboard import PyKeyboard
+import os
+import uuid
 import webbrowser
 import netifaces
+from functools import wraps
+
+from flask import Flask, render_template
+from flask import jsonify as flask_jsonify
+from pykeyboard import PyKeyboard
+import pyqrcode
+
+
+PORT = 5000  # default listen on port 5000
 app = Flask(__name__)
 k = PyKeyboard()
 
@@ -25,7 +32,17 @@ def jsonify(f):
 @app.route('/')
 def pysenteishon():
     local_ips = get_local_ip_addresses()
-    return render_template('index.html', local_ips=local_ips)
+    qr_code = ""
+    if local_ips:
+        preferred_ip = local_ips[0]
+        link = "http://%s:%s" % (preferred_ip, PORT)
+        url = pyqrcode.create(link)
+        filename = str(uuid.uuid4())
+        path = os.path.join(
+            os.path.dirname(__file__), "static/img/%s.svg" % filename)
+        url.svg(path, scale=8)
+        qr_code = "/static/img/%s.svg" % filename
+    return render_template('index.html', local_ips=local_ips, qr_code=qr_code)
 
 
 @app.route('/btn-up/')
@@ -63,10 +80,10 @@ def get_local_ip_addresses():
         if interface == 'lo':
             continue
         iface = netifaces.ifaddresses(interface).get(netifaces.AF_INET)
-        if iface != None:
+        if iface is not None:
             for x in iface:
                 addr = x['addr']
-                if addr  == '127.0.0.1':
+                if addr == '127.0.0.1':
                     continue
                 local_ips.append(x['addr'])
     return local_ips
@@ -74,7 +91,6 @@ def get_local_ip_addresses():
 
 if __name__ == '__main__':
     IP_ADDRESS = '0.0.0.0'  # default listen in all interfaces
-    PORT = 5000  # default listen on port 5000
     url = 'http://{host}:{port}'.format(host=IP_ADDRESS, port=PORT)
     webbrowser.open(url)
     print(' * Opening web browser at %s, please wait ...' % url)
