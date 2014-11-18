@@ -43,7 +43,6 @@ def pysenteishon():
         url.svg(path, scale=8)
         qr_code = "/static/img/%s.svg" % filename
     return render_template('index.html', local_ips=local_ips, qr_code=qr_code)
-    #return render_template('index.html', local_ips=local_ips)
 
 
 @app.route('/btn-up/')
