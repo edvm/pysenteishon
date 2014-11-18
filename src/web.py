@@ -2,7 +2,6 @@ import os
 import uuid
 import webbrowser
 import netifaces
-import tempfile
 from functools import wraps
 
 from flask import Flask, render_template
@@ -11,7 +10,7 @@ from pykeyboard import PyKeyboard
 import pyqrcode
 
 
-PORT = 5000
+PORT = 5000  # default listen on port 5000
 app = Flask(__name__)
 k = PyKeyboard()
 
@@ -44,6 +43,7 @@ def pysenteishon():
         url.svg(path, scale=8)
         qr_code = "/static/img/%s.svg" % filename
     return render_template('index.html', local_ips=local_ips, qr_code=qr_code)
+    #return render_template('index.html', local_ips=local_ips)
 
 
 @app.route('/btn-up/')
@@ -81,10 +81,10 @@ def get_local_ip_addresses():
         if interface == 'lo':
             continue
         iface = netifaces.ifaddresses(interface).get(netifaces.AF_INET)
-        if iface != None:
+        if iface is not None:
             for x in iface:
                 addr = x['addr']
-                if addr  == '127.0.0.1':
+                if addr == '127.0.0.1':
                     continue
                 local_ips.append(x['addr'])
     return local_ips
