@@ -1,4 +1,4 @@
 #!/bin/bash
 # Run pysenteishon Flask web app
 
-python -m web
+python src/web.py
