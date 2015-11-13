@@ -1,4 +1,4 @@
-Flask
 PyUserInput
+python3-xlib
 netifaces
 pyqrcode
