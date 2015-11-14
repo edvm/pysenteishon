@@ -52,3 +52,7 @@
     text-transform: uppercase;
     text-shadow: 0px 11px 0px rgba(150, 150, 150, 0.33);
 }
+
+#chronometer {
+    text-align: center;
+}
