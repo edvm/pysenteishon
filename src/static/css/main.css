@@ -1,42 +1,17 @@
-.box
-{
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #ffffff 0%, #f1f1f1 13%, #f1f1f1 24%, #e1e1e1 37%, #f1f1f1 48%, #e1e1e1 61%, #f1f1f1 85%, #f1f1f1 89%, #f6f6f6 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ffffff), color-stop(13%,#f1f1f1), color-stop(24%,#f1f1f1), color-stop(37%,#e1e1e1), color-stop(48%,#f1f1f1), color-stop(61%,#e1e1e1), color-stop(85%,#f1f1f1), color-stop(89%,#f1f1f1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(-45deg, #ffffff 0%,#f1f1f1 13%,#f1f1f1 24%,#e1e1e1 37%,#f1f1f1 48%,#e1e1e1 61%,#f1f1f1 85%,#f1f1f1 89%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(-45deg, #ffffff 0%,#f1f1f1 13%,#f1f1f1 24%,#e1e1e1 37%,#f1f1f1 48%,#e1e1e1 61%,#f1f1f1 85%,#f1f1f1 89%,#f6f6f6 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(-45deg, #ffffff 0%,#f1f1f1 13%,#f1f1f1 24%,#e1e1e1 37%,#f1f1f1 48%,#e1e1e1 61%,#f1f1f1 85%,#f1f1f1 89%,#f6f6f6 100%); /* IE10+ */
-    background: linear-gradient(135deg, #ffffff 0%,#f1f1f1 13%,#f1f1f1 24%,#e1e1e1 37%,#f1f1f1 48%,#e1e1e1 61%,#f1f1f1 85%,#f1f1f1 89%,#f6f6f6 100%); /* W3C */
-    border-radius: 6px;
-    box-shadow: 6px 6px 11px #c3c3c2;
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-    font-weight: 300;
-    font-size: 20px;
-    height: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    max-width: 10024px;
-    line-height: 36px;
-    overflow:hidden;
-    padding: 10px;
-    text-align:center;
-
+body {
+    background: black;
 }
 
-.nice-background
+.box
 {
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #ffffff 0%, #f1f1f1 13%, #f1f1f1 24%, #e1e1e1 37%, #f1f1f1 48%, #e1e1e1 61%, #f1f1f1 85%, #f1f1f1 89%, #f6f6f6 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ffffff), color-stop(13%,#f1f1f1), color-stop(24%,#f1f1f1), color-stop(37%,#e1e1e1), color-stop(48%,#f1f1f1), color-stop(61%,#e1e1e1), color-stop(85%,#f1f1f1), color-stop(89%,#f1f1f1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(-45deg, #ffffff 0%,#f1f1f1 13%,#f1f1f1 24%,#e1e1e1 37%,#f1f1f1 48%,#e1e1e1 61%,#f1f1f1 85%,#f1f1f1 89%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(-45deg, #ffffff 0%,#f1f1f1 13%,#f1f1f1 24%,#e1e1e1 37%,#f1f1f1 48%,#e1e1e1 61%,#f1f1f1 85%,#f1f1f1 89%,#f6f6f6 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(-45deg, #ffffff 0%,#f1f1f1 13%,#f1f1f1 24%,#e1e1e1 37%,#f1f1f1 48%,#e1e1e1 61%,#f1f1f1 85%,#f1f1f1 89%,#f6f6f6 100%); /* IE10+ */
-    background: linear-gradient(135deg, #ffffff 0%,#f1f1f1 13%,#f1f1f1 24%,#e1e1e1 37%,#f1f1f1 48%,#e1e1e1 61%,#f1f1f1 85%,#f1f1f1 89%,#f6f6f6 100%); /* W3C */
-    border-radius: 6px;
-    box-shadow: 6px 6px 11px #c3c3c2;
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background: #337ab7; /* Old browsers */
+    border-radius: 5px;
+    box-shadow: 4px 4px 6px #1B3F5F;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align:center;
+    color: #fff;
+    padding: 1px;
 }
 
 .network-iface
@@ -55,4 +30,36 @@
 
 #chronometer {
     text-align: center;
+}
+
+
+.clock {
+    height: 50px;
+    line-height: 50px;
+    font-size: 50px;
+    cursor: pointer;
+    text-shadow: 2px 2px 1px #000;
+}
+
+.time-left {
+    height: 50px;
+    line-height: 50px;
+    font-size: 33px;
+    text-shadow: 1px 1px 2px rgba(20, 50, 76, 0.8);
+    color: #FF8080;
+    cursor: pointer;
+}
+
+.time-left.stopped {
+    color: #FF8080;
+}
+
+.time-left.running {
+    color: #43F343;
+}
+
+#slider .fa {
+    cursor: pointer;
+    text-shadow: 2px 2px 1px #000;
+    margin: 0 5px;
 }

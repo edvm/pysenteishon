@@ -6,22 +6,24 @@ function Chronometer ($el) {
   this.lastCheckTime = null;
   this.milliSecondsLeft = 45*60*1000;
 
-  this.$clock.swipe({
-    tap: function (event, object) {
+  this.notifications = [
+    10,
+    5
+  ];
+
+  this.$clock.click(function () {
       this.running = !this.running;
       if (this.running) {
-        this.$timeLeft.css("color", "green");
+        this.$timeLeft.addClass("running");
         this.lastCheckTime = new Date();
       } else {
-        this.$timeLeft.css("color", "red");
+        this.$timeLeft.removeClass("running");
       }
-    }.bind(this),
-    doubleTap: function(event, object) {
-    }
-  });
+    }.bind(this));
 
   this.$timeLeft.click(function(){
     var minutes = prompt("Time in minutes");
+    if (minutes===null) { return }
     this.milliSecondsLeft = minutes*60*1000;
     this.lastCheckTime = new Date();
     this.running = false;
@@ -29,60 +31,81 @@ function Chronometer ($el) {
   }.bind(this));
 
   setInterval(function () {
+    // tick
     if (this.running) {
       this.milliSecondsLeft -= ((new Date()).getTime() - this.lastCheckTime.getTime());
       this.lastCheckTime = new Date();
       this.render();
+      this.checkNotifications();
     }
   }.bind(this), 500);
 
   this.render = function () {
     var min = (this.milliSecondsLeft/1000/60) << 0;
     var sec = (this.milliSecondsLeft/1000) % 60 << 0;
+    sec = ("000"+Math.abs(sec)).slice(-2);
     this.$timeLeft.text(min+":"+sec);
+  };
+
+  this.checkNotifications = function () {
+    // reduced by one to avoid notifying on the end 10:59
+    var min = ((this.milliSecondsLeft/1000/60) << 0) - 1;
+    var len = this.notifications.length;
+    this.notifications = this.notifications.filter(function (time) {
+      return time != min;
+    });
+    if ( len != this.notifications.length ) {
+      // filtered notification have less items, lets notify the user
+      this.notify("Time left "+min);
+    }
+  };
+
+  // notify permission
+  Notification.requestPermission();
+  this.notify = function (text) {
+    if (!("Notification" in window)) {
+      return
+    }
+    if (Notification.permission === "granted") {
+      new Notification(text);
+    }
   };
 
   this.render();
 }
 
-$(function() {
-  new Chronometer($("#chronometer"));
 
-  // Enable swiping...
-  $("#touche").swipe({
-    //Generic swipe handler for all directions
-    swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-      "use strict";
+function Slider ($el) {
+  this.$el = $el;
+  this.sending = false;
 
-      // console.log("You swiped " + direction );
-      var slideMsg = "";
-      var url = "/btn-" + direction + "/";
-      var icon = "fa fa-arrow-circle-" + direction + " fa-5x center-block";
+  this.do = function (url) {
+    if (this.doDoing) { return }
+    this.doDoing = true;
+    $.ajax({ type: "GET", url: url }).always(function () {
+      this.doDoing = false;
+    }.bind(this));
+  };
 
-      if (direction == "right") {
-        slideMsg = "Shows previous slide!";
-      } else if (direction == "left") {
-        slideMsg = "Shows next slide!";
-      } else if (direction == "up") {
-        slideMsg = "Pressed Key Up!";
-      } else if (direction == "down") {
-        slideMsg = "Pressed Key Down";
-      } else {
-        icon = "fa fa-warning fa-5x center-block";
-        slideMsg = "Not implemented option!";
-      }
+  this.$el.find("#key-left").click(function () {
+    this.do("/left/");
+  }.bind(this));
 
-      $("#touche-directions-icon").attr("class", icon);
-      $("#slide-text").html(slideMsg);
+  this.$el.find("#key-right").click(function () {
+    this.do("/right/");
+  }.bind(this));
 
-      $.ajax({
-        type: "GET",
-        url: url,
-        dataType: "json"
-      });
-    },
-    //Default is 75px, set to 0 for demo so any distance triggers swipe
-    threshold:0
-  });
+  this.$el.find("#key-down").click(function () {
+    this.do("/down/");
+  }.bind(this));
 
+  this.$el.find("#key-up").click(function () {
+    this.do("/up/");
+  }.bind(this));
+
+}
+
+$(function () {
+  var chronometer = new Chronometer($("#chronometer"));
+  new Slider($("#slider"));
 });

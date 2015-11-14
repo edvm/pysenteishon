@@ -61,7 +61,7 @@
   </div>
 
 
-  <nav class="navbar navbar-default nice-background" role="navigation">
+  <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -83,23 +83,44 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div id="touche" class="row box">
-    <div id="touche-directions" class="row">
-      <i id="touche-directions-icon" class="fa fa-arrow-circle-left fa-5x center-block"></i> <br>
-    </div>
-  </div>
-
-  <h3 id="slide-text">Showing next slide!</h3>
-
-  <div id="chronometer" class="row">
-    <div class="col-xs-12">
-      <div class="row">
-        <i class="clock fa fa-clock-o fa-5x center-block"></i> <br>
-      </div>
-      <div class="row">
-        <div class="time-left" style="font-size:21px; font-weight:800;">0:0</div>
+  <div class="container-fluid">
+    <div id="chronometer" class="row">
+      <div class="box col-xs-12">
+        <div class="col-xs-3">
+          <i class="clock fa fa-clock-o fa-3x center-block"></i> <br>
+        </div>
+        <div class="col-xs-9">
+          <div class="time-left">--:--</div>
+        </div>
       </div>
     </div>
+
+
+    <div id="slider">
+
+      <div class="row box">
+        <div class="col-xs-12">
+          <i id="key-up" class="fa fa-arrow-circle-up fa-5x"></i> <br>
+        </div>
+
+        <div class="col-xs-4">
+          <i id="key-left" class="fa fa-arrow-circle-left fa-5x"></i> <br>
+        </div>
+        <div class="col-xs-4">
+        </div>
+        <div class="col-xs-4">
+          <i id="key-right" class="fa fa-arrow-circle-right fa-5x"></i> <br>
+        </div>
+
+        <div class="col-xs-12">
+          <i id="key-down" class="fa fa-arrow-circle-down fa-5x"></i> <br>
+        </div>
+      </div>
+
+
+    </div>
+
+
   </div>
 
 </div>
@@ -110,3 +131,4 @@
 <script type="text/javascript" src="/static/js/pysenteishon.js"></script>
 </body>
 </html>
+
