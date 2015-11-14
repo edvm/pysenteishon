@@ -11,29 +11,14 @@ def is_python3():
     return sys.version_info > (3, 0)
 
 
-def dependencies_alright():
-    if is_linux():
-        try:
-            from Xlib.display import Display
-        except ImportError as exc:
-            if is_python3():
-                print('You must install python-xlib to use Pytsenteishon')
-                print('Just type: pip install python3-xlib')
-            else:
-                print('You must install python-xlib to use Pytsenteishon')
-                print('Just type: pip install svn+https://python-xlib.svn.sourceforge.net/svnroot/python-xlib/trunk/')
-            return False
-    return True
-
-
 def setup():
-    if not dependencies_alright():
-        return
+    assert is_python3(), "Pysenteishon only runs with python >= 3."
     distutils_setup(
         name='pysenteishon',
         author='Emiliano Dalla Verde Marcozzi <edvm@fedoraproject.org>',
         version='0.2',
         package_dir={'': 'src'},
+        install_requires=[r.strip() for r in open('requirements.txt', 'r').readlines()],
         package_data={
             '': [
                 'templates/*',
