@@ -1,4 +1,5 @@
 import json
+import argparse
 import codecs
 import http.server
 from pykeyboard import PyKeyboard
@@ -28,11 +29,16 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         self.wfile.write(codecs.utf_8_encode(data)[0])
 
 
-def run(server_class=http.server.HTTPServer, handler_class=RequestHandler):
-    server_address = ('', 5000)
+def run(server_class=http.server.HTTPServer, handler_class=RequestHandler, port=None):
+    server_address = ('', int(port) if port else 5000)
     httpd = server_class(server_address, handler_class)
+    server_address, server_port = httpd.server_address
+    print('Running on {}:{}'.format(server_address, server_port))
     httpd.serve_forever()
 
 
 if __name__ == '__main__':
-    run()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--port')
+    args = parser.parse_args()
+    run(port=args.port)
