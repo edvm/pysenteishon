@@ -1,6 +1,8 @@
+import os
 import json
 import argparse
-import codecs
+import ipaddress
+import netifaces
 import http.server
 from pykeyboard import PyKeyboard
 
@@ -19,14 +21,55 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         }
         return keys.get(path)
 
-    def do_GET(self):
-        key_to_press = self.get_key(self.path)
-        if key_to_press:
-            k.tap_key(key_to_press)
+    def get_ip_address_list(self):
+        local_ips = []
+        interfaces = netifaces.interfaces()
+        for interface in interfaces:
+            if interface == 'lo':
+                continue
+            interface_data = netifaces.ifaddresses(interface).get(netifaces.AF_INET)
+            if interface_data is not None:
+                for field in interface_data:
+                    ip = ipaddress.ip_address(field['addr'])
+                    if ip.is_loopback:
+                        continue
+                    local_ips.append(field['addr'])
+        return local_ips
+
+    def do_response(self, content=None, content_type=None):
         self.send_response(200)
+        if content_type:
+            self.send_header('Content-type', 'text/{}'.format(content_type.strip('.')))
         self.end_headers()
-        data = json.dumps({'status': True})
-        self.wfile.write(codecs.utf_8_encode(data)[0])
+        if content:
+            self.wfile.write(bytes(content, 'utf-8'))
+
+    def get_static_file_content(self, staticdir='static'):
+        filecontent = ''
+        path, ext = os.path.splitext(self.path)
+        if path == '/':
+            path, ext = 'index', '.html'
+
+        if ext in [".css", ".js", ".html"]:
+            filename = path.strip('/') + ext
+            filepath = os.path.join(staticdir, filename)
+            with open(filepath, 'r') as fp:
+                filecontent = fp.read()
+
+        return filecontent
+
+    def do_GET(self):
+        key_to_tap = self.get_key(self.path)
+        content_type = None
+
+        if key_to_tap:
+            k.tap_key(key_to_tap)
+            data = json.dumps({'status': True})
+
+        if key_to_tap is None:
+            data = self.get_static_file_content()
+
+        self.do_response(content=data, content_type=content_type)
 
 
 def run(server_class=http.server.HTTPServer, handler_class=RequestHandler, port=None):
