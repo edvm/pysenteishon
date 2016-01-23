@@ -77,7 +77,7 @@ function Chronometer ($el) {
 
 function Slider ($el) {
   this.$el = $el;
-  this.sending = false;
+  this.doDoing = false;
 
   this.do = function (url) {
     if (this.doDoing) { return }

@@ -4,6 +4,8 @@ import argparse
 import ipaddress
 import netifaces
 import http.server
+import cherrypy
+
 from pykeyboard import PyKeyboard
 
 
@@ -63,7 +65,7 @@ def get_network_interface_list():
     for ifaceName in netifaces.interfaces():
         addresses = [i['addr'] for i in netifaces.ifaddresses(ifaceName).setdefault(
             netifaces.AF_INET, [{'addr': '127.0.0.1'}]) if not
-            ipaddress.ip_address(i['addr']).is_loopback and i['addr'] != '']
+                     ipaddress.ip_address(i['addr']).is_loopback and i['addr'] != '']
         if not addresses:  # interface without an ip address
             continue
         network_interfaces.append({'name': ifaceName, 'addresses': ','.join(addresses)})
@@ -83,8 +85,26 @@ def run(server_class=http.server.HTTPServer, handler_class=RequestHandler, port=
     httpd.serve_forever()
 
 
+class PySenteishon(object):
+
+    @cherrypy.expose
+    def index(self):
+        raise cherrypy.HTTPRedirect("/index.html")
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--port')
     args = parser.parse_args()
-    run(port=args.port)
+
+    conf = {
+        # 'server.socket_port': int(args.port) if args.port else DEFAULT_PORT,
+        '/': {
+            'tools.staticdir.on': True,
+            'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()), "static")
+        }
+    }
+    cherrypy.quickstart(PySenteishon(), '/', conf)
+
+
+    # run(port=args.port)
