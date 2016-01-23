@@ -36,19 +36,23 @@
           <h4 class="modal-title" id="network-settings-modal-label"><i class="fa fa-wifi"></i> Network Settings</h4>
         </div>
         <div class="modal-body">
+
           {% if local_ips|length > 1 %}
             At your smartphone execute a web browser and open one of the following urls:
           {% else %}
             At your smartphone execute a web browser and open the following url:
           {% endif %}
+
           <br/>
           <br/>
+
           {% for ip in local_ips %}
             <div class="network-iface">
               <p> <i class="fa fa-bolt"></i>  http://{{ ip }}:5000</p>
-              <p><img src="{{ qr_code }}"/></p>
+              <p><img {{ qr_code }} /></p>
             </div>
           {% endfor %}
+
         </div>
         <div class="modal-footer">
           <div>
