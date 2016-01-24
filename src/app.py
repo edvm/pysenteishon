@@ -13,51 +13,63 @@ DEFAULT_PORT = 5000
 k = PyKeyboard()
 
 
-class RequestHandler(http.server.BaseHTTPRequestHandler):
+class PySenteishon(object):
+
+    @cherrypy.expose
+    def index(self):
+        """Redirect to index.html"""
+        raise cherrypy.HTTPRedirect("/index.html")
+
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    def press(self, key=None):
+        """Press a key endpoint.
+
+        GET URL Example:
+            http://127.0.0.1:8080/press?key=up
+
+        Arguments:
+            'up'(str)       Press the up arrow key
+            'down'(str)     Press the down arrow key
+            'left'(str)     Press the left arrow key
+            'right'(str)    Press the right arrow key
+
+        Returns a json response with action status.
+
+        For example:
+            {"key-pressed": true, "key": "left"}
+        """
+        key_to_tap = self.get_key(key)
+        if key_to_tap:
+            k.tap_key(key_to_tap)
+            return {"key-pressed": True, "key": key}
+        return {"key-pressed": False, "key": None}
+
+    @cherrypy.expose(alias='ifconfig')
+    @cherrypy.tools.json_out()
+    def network_information(self):
+        """Return a JSON response with network information.
+
+        GET URL Example:
+            http://127.0.0.1:8080/ifconfig
+
+        For example:
+        [
+            {"addresses": "192.168.0.13", "name": "wlp1s0"},
+            {"addresses": "172.17.0.1", "name": "docker0"}
+        ]
+        """
+        network_info = get_network_interface_list()
+        return network_info
 
     def get_key(self, path):
         keys = {
-            '/up': k.up_key,
-            '/down': k.down_key,
-            '/right': k.right_key,
-            '/left': k.left_key,
+            'up': k.up_key,
+            'down': k.down_key,
+            'left': k.left_key,
+            'right': k.right_key,
         }
         return keys.get(path)
-
-    def do_response(self, content=None, content_type=None):
-        self.send_response(200)
-        if content_type:
-            self.send_header('Content-type', 'text/{}'.format(content_type.strip('.')))
-        self.end_headers()
-        if content:
-            self.wfile.write(bytes(content, 'utf-8'))
-
-    def get_static_file_content(self, staticdir='static'):
-        filecontent = ''
-        path, ext = os.path.splitext(self.path)
-        if path == '/':
-            path, ext = 'index', '.html'
-
-        if ext in [".css", ".js", ".html"]:
-            filename = path.strip('/') + ext
-            filepath = os.path.join(staticdir, filename)
-            with open(filepath, 'r') as fp:
-                filecontent = fp.read()
-
-        return filecontent
-
-    def do_GET(self):
-        key_to_tap = self.get_key(self.path)
-        content_type = None
-
-        if key_to_tap:
-            k.tap_key(key_to_tap)
-            data = json.dumps({'status': True})
-
-        if key_to_tap is None:
-            data = self.get_static_file_content()
-
-        self.do_response(content=data, content_type=content_type)
 
 
 def get_network_interface_list():
@@ -70,26 +82,6 @@ def get_network_interface_list():
             continue
         network_interfaces.append({'name': ifaceName, 'addresses': ','.join(addresses)})
     return network_interfaces
-
-
-def run(server_class=http.server.HTTPServer, handler_class=RequestHandler, port=None):
-    port = int(port) if port else DEFAULT_PORT
-    server_address = ('', port)
-    httpd = server_class(server_address, handler_class)
-    server_address, server_port = httpd.server_address
-    print('Pysenteishon is running on {}:{}'.format(server_address, server_port))
-    print('If you use a firewall, keep in mind to allow connections on port: {}'.format(port))
-    print('On your smartphone, open the web browser using one of the following urls:')
-    for iface in get_network_interface_list():
-        print('\t- http://{}:{}'.format(iface['addresses'], port))
-    httpd.serve_forever()
-
-
-class PySenteishon(object):
-
-    @cherrypy.expose
-    def index(self):
-        raise cherrypy.HTTPRedirect("/index.html")
 
 
 if __name__ == '__main__':
@@ -105,6 +97,3 @@ if __name__ == '__main__':
         }
     }
     cherrypy.quickstart(PySenteishon(), '/', conf)
-
-
-    # run(port=args.port)
