@@ -86,12 +86,16 @@ def get_network_interface_list():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--port')
+    parser.add_argument('-p', '--port', type=int, default=5000, help="Listen on port")
+    parser.add_argument('-a', '--auth', nargs=2, metavar=('user', 'password'), help="Basic auth")
     args = parser.parse_args()
+
+    def validate_password(realm, user, password):
+        return args.auth[0] == user and args.auth[1] == password
 
     cherrypy.config.update({
         'server.socket_host': '0.0.0.0',
-        'server.socket_port': int(args.port) if args.port else DEFAULT_PORT,
+        'server.socket_port': args.port
     })
 
     conf = {
@@ -100,4 +104,10 @@ if __name__ == '__main__':
             'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()), "static")
         }
     }
+    if args.auth is not None:
+        conf['/'].update({
+            'tools.auth_basic.on': True,
+            'tools.auth_basic.realm': 'pysenteishon',
+            'tools.auth_basic.checkpassword': validate_password,
+        })
     cherrypy.quickstart(PySenteishon(), '/', conf)
