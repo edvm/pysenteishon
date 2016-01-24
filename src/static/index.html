@@ -40,17 +40,15 @@
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <h4 class="modal-title" id="network-settings-modal-label"><i class="fa fa-wifi"></i> Network Settings</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="network-info">
           <p>Remember to allow connections on port that the server is running. At your phone execute a web browser and open one of the following urls:</p>
           <br/>
 
-          <div class="network-iface">
-            <ul>
-              <li>192.168.1.1:5000</li>
-            </ul>
+          <div class="network-list">
+            <ul></ul>
           </div>
 
-          <div id="qr-iface"></div>
+          <div class="network-qr"></div>
 
         </div>
         <div class="modal-footer">

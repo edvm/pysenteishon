@@ -22,7 +22,7 @@ class PySenteishon(object):
 
     @cherrypy.expose
     @cherrypy.tools.json_out()
-    def press(self, key=None):
+    def press(self, key=None, *args, **kwargs):
         """Press a key endpoint.
 
         GET URL Example:
@@ -80,7 +80,7 @@ def get_network_interface_list():
                      ipaddress.ip_address(i['addr']).is_loopback and i['addr'] != '']
         if not addresses:  # interface without an ip address
             continue
-        network_interfaces.append({'name': ifaceName, 'addresses': ','.join(addresses)})
+        network_interfaces.append({'name': ifaceName, 'addresses': addresses})
     return network_interfaces
 
 
@@ -89,8 +89,12 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--port')
     args = parser.parse_args()
 
+    cherrypy.config.update({
+        'server.socket_host': '0.0.0.0',
+        'server.socket_port': int(args.port) if args.port else DEFAULT_PORT,
+    })
+
     conf = {
-        # 'server.socket_port': int(args.port) if args.port else DEFAULT_PORT,
         '/': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()), "static")

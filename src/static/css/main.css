@@ -2,16 +2,21 @@
     blue-dark: #274E70;
     blue: #366D9D;
     blue-light: #5784AB;
+    blue-lighter: #6F9ABF;
 
     yellow-dark: #BB9400;
     yellow: #FFD535;
-    yellow-light: #FFE480;
+    yellow-light: #ffd966;
+    yellow: #FFE480;
 }
 
 body {
-    background: #FFD535;
+    background: #FFE480;
 }
 
+.navbar {
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+}
 .box {
     background: #5784AB;
     border-radius: 5px;
@@ -23,23 +28,42 @@ body {
     padding: 14px 0;
 }
 
-.network-iface
-{
-    padding-left: 10px;
+#network-info {
+    font-size: 20px;
 }
-#qr-iface {
-    text-align: center;
+.network-list li {
+    height: 35px;
+    line-height: 35px;
+    cursor: pointer;
 }
-#qr-iface canvas,
-#qr-iface img {
-    display: inline-block;
+.network-list ul {
+    list-style: none;
+    padding-left: 0;
+}
+.network-list ul span {
+    font-weight: bold;
+    padding-right: 5px;
 }
 
+.network-list i {
+    color: #6F9ABF;
+    font-size: 25px;
+    padding-left: 5px;
+}
+
+.network-qr {
+    text-align: center;
+}
+.network-qr canvas {
+    display: none !important;;
+}
+.network-qr img {
+    display: inline-block !important;
+}
 
 #chronometer {
     text-align: center;
 }
-
 
 .clock {
     height: 50px;
@@ -47,30 +71,34 @@ body {
     font-size: 50px;
     cursor: pointer;
     text-shadow: 0px 0px 7px rgba(0,0,0,0.8);
+    transition: 0.5s all;
+}
+.clock:hover {
+    color: #FFE480;
 }
 
 .time-left {
     height: 50px;
     line-height: 50px;
     font-size: 33px;
-    text-shadow: 0px 0px 14px #FFE480;
+    text-shadow: 0px 0px 8px #6F9ABF;
     color: #274E70;
     cursor: pointer;
-}
-
-.time-left.stopped {
-    color: #274E70;
+    transition: 0.5s all;
 }
 
 .time-left.running {
     color: #FFE480;
+    text-shadow: 0px 0px 14px #FFE480;
 }
 
 #slider .fa {
     cursor: pointer;
     text-shadow: 0px 0px 7px rgba(0,0,0,0.8);
     margin: 0 5px;
+    transition: 0.5s all;
 }
+
 #slider .fa:hover {
     color: #FFE480;
 }
