@@ -1,32 +1,40 @@
-body {
-    background: black;
+.palette {
+    blue-dark: #274E70;
+    blue: #366D9D;
+    blue-light: #5784AB;
+
+    yellow-dark: #BB9400;
+    yellow: #FFD535;
+    yellow-light: #FFE480;
 }
 
-.box
-{
-    background: #337ab7; /* Old browsers */
+body {
+    background: #FFD535;
+}
+
+.box {
+    background: #5784AB;
     border-radius: 5px;
-    box-shadow: 4px 4px 6px #1B3F5F;
+    box-shadow: 4px 4px 6px #274E70;
     margin-top: 5px;
     margin-bottom: 5px;
     text-align:center;
     color: #fff;
-    padding: 1px;
+    padding: 14px 0;
 }
 
 .network-iface
 {
     padding-left: 10px;
 }
-
-#touche {
-    text-transform: uppercase;
+#qr-iface {
+    text-align: center;
+}
+#qr-iface canvas,
+#qr-iface img {
+    display: inline-block;
 }
 
-#slide-msg {
-    text-transform: uppercase;
-    text-shadow: 0px 11px 0px rgba(150, 150, 150, 0.33);
-}
 
 #chronometer {
     text-align: center;
@@ -38,28 +46,31 @@ body {
     line-height: 50px;
     font-size: 50px;
     cursor: pointer;
-    text-shadow: 2px 2px 1px #000;
+    text-shadow: 0px 0px 7px rgba(0,0,0,0.8);
 }
 
 .time-left {
     height: 50px;
     line-height: 50px;
     font-size: 33px;
-    text-shadow: 1px 1px 2px rgba(20, 50, 76, 0.8);
-    color: #FF8080;
+    text-shadow: 0px 0px 14px #FFE480;
+    color: #274E70;
     cursor: pointer;
 }
 
 .time-left.stopped {
-    color: #FF8080;
+    color: #274E70;
 }
 
 .time-left.running {
-    color: #43F343;
+    color: #FFE480;
 }
 
 #slider .fa {
     cursor: pointer;
-    text-shadow: 2px 2px 1px #000;
+    text-shadow: 0px 0px 7px rgba(0,0,0,0.8);
     margin: 0 5px;
+}
+#slider .fa:hover {
+    color: #FFE480;
 }

@@ -102,10 +102,10 @@ function Slider ($el) {
   this.$el.find("#key-up").click(function () {
     this.do("/up/");
   }.bind(this));
-
 }
 
 $(function () {
   var chronometer = new Chronometer($("#chronometer"));
-  new Slider($("#slider"));
+  var slider = new Slider($("#slider"));
+  new QRCode(document.getElementById("qr-iface"), "http://preferred:iface");
 });
