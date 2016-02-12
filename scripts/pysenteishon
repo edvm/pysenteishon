@@ -1,4 +1,4 @@
 #!/bin/bash
-# Run pysenteishon Flask web app
+# Run pysenteishon CherryPy web app
 
-python src/web.py
+python src/app.py
