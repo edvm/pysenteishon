@@ -109,3 +109,6 @@ def main():
             'tools.auth_basic.checkpassword': validate_password,
         })
     cherrypy.quickstart(PySenteishon(), '/', conf)
+
+if __name__ == '__main__':
+    main()

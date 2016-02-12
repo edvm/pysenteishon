@@ -1,4 +1,0 @@
-#!/bin/bash
-# Run pysenteishon CherryPy web app
-
-python src/app.py
