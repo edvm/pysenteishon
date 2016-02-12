@@ -99,7 +99,7 @@ if __name__ == '__main__':
     conf = {
         '/': {
             'tools.staticdir.on': True,
-            'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()), "static")
+            'tools.staticdir.dir': os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
         }
     }
     if args.auth is not None:
