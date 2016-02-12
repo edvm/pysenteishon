@@ -75,14 +75,14 @@ def get_network_interface_list():
     for ifaceName in netifaces.interfaces():
         addresses = [i['addr'] for i in netifaces.ifaddresses(ifaceName).setdefault(
             netifaces.AF_INET, [{'addr': '127.0.0.1'}]) if not
-                     ipaddress.ip_address(i['addr']).is_loopback and i['addr'] != '']
+            ipaddress.ip_address(i['addr']).is_loopback and i['addr'] != '']
         if not addresses:  # interface without an ip address
             continue
         network_interfaces.append({'name': ifaceName, 'addresses': addresses})
     return network_interfaces
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--port', type=int, default=5000, help="Listen on port")
     parser.add_argument('-a', '--auth', nargs=2, metavar=('user', 'password'), help="Basic auth")

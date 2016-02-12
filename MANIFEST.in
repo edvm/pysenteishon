@@ -1,0 +1,5 @@
+exclude freeze.py
+graft pysenteishon/src/static
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
