@@ -1,9 +1,7 @@
 import os
-import json
 import argparse
 import ipaddress
 import netifaces
-import http.server
 import cherrypy
 
 from pykeyboard import PyKeyboard
