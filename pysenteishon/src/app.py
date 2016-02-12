@@ -84,7 +84,7 @@ def get_network_interface_list():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--port', type=int, default=5000, help="Listen on port")
+    parser.add_argument('-p', '--port', type=int, default=DEFAULT_PORT, help="Listen on port")
     parser.add_argument('-a', '--auth', nargs=2, metavar=('user', 'password'), help="Basic auth")
     args = parser.parse_args()
 
