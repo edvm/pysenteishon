@@ -1,5 +1,5 @@
 exclude freeze.py
-graft pysenteishon/src/static
+graft pysenteishon/static
 include *.txt
 include *.rst
 include *.md
