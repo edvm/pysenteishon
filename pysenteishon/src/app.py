@@ -1,9 +1,7 @@
 import os
-import json
 import argparse
 import ipaddress
 import netifaces
-import http.server
 import cherrypy
 
 from pykeyboard import PyKeyboard
@@ -77,16 +75,16 @@ def get_network_interface_list():
     for ifaceName in netifaces.interfaces():
         addresses = [i['addr'] for i in netifaces.ifaddresses(ifaceName).setdefault(
             netifaces.AF_INET, [{'addr': '127.0.0.1'}]) if not
-                     ipaddress.ip_address(i['addr']).is_loopback and i['addr'] != '']
+            ipaddress.ip_address(i['addr']).is_loopback and i['addr'] != '']
         if not addresses:  # interface without an ip address
             continue
         network_interfaces.append({'name': ifaceName, 'addresses': addresses})
     return network_interfaces
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--port', type=int, default=5000, help="Listen on port")
+    parser.add_argument('-p', '--port', type=int, default=DEFAULT_PORT, help="Listen on port")
     parser.add_argument('-a', '--auth', nargs=2, metavar=('user', 'password'), help="Basic auth")
     args = parser.parse_args()
 
@@ -101,7 +99,7 @@ if __name__ == '__main__':
     conf = {
         '/': {
             'tools.staticdir.on': True,
-            'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()), "static")
+            'tools.staticdir.dir': os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
         }
     }
     if args.auth is not None:
@@ -111,3 +109,6 @@ if __name__ == '__main__':
             'tools.auth_basic.checkpassword': validate_password,
         })
     cherrypy.quickstart(PySenteishon(), '/', conf)
+
+if __name__ == '__main__':
+    main()

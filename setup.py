@@ -1,40 +1,46 @@
 import sys
-import platform
-from distutils.core import setup as distutils_setup
+from setuptools import setup, find_packages
 
 
-def is_linux():
-    return platform.system() == 'Linux'
+if sys.version_info[0] < 3:
+    raise Exception('Python 2 version is not supported')
 
+with open('requirements.txt', 'r') as fh:
+    dependencies = [l.strip() for l in fh]
 
-def is_python3():
-    return sys.version_info > (3, 0)
-
-
-def setup():
-    assert is_python3(), "Pysenteishon only runs with python >= 3."
-    distutils_setup(
-        name='pysenteishon',
-        author='Emiliano Dalla Verde Marcozzi <edvm@fedoraproject.org>',
-        version='0.2',
-        package_dir={'': 'src'},
-        install_requires=[r.strip() for r in open('requirements.txt', 'r').readlines()],
-        package_data={
-            '': [
-                'templates/*',
-                'static/js/*.js',
-                'static/css/*.css',
-                'static/font-awesome/css/*',
-                'static/font-awesome/scss/*',
-                'static/font-awesome/less/*',
-                'static/font-awesome/fonts/*',
-            ]
-        },
-        packages=[''],
-        scripts=[
-            'scripts/pysenteishon',
-        ]
-    )
-
-
-setup()
+setup(
+    name='pysenteishon',
+    version='1.0.0b1',
+    description='Control your presentations swiping your touchscreen!',
+    long_description=open('README.rst').read(),
+    url='https://github.com/edvm/pysenteishon',
+    author='Emiliano Dalla Verde Marcozzi',
+    author_email='edvm@fedoraproject.org',
+    maintainer='Manuel Kaufmann',
+    maintainer_email='humitos@gmail.com',
+    license='GPLv3',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Environment :: Console',
+        'Environment :: Web Environment',
+        'Intended Audience :: End Users/Desktop',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Operating System :: Unix',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Topic :: Communications :: Conferencing',
+    ],
+    keywords='presentation touchscreen talk pycon conference',
+    packages=find_packages(exclude=['samples']),
+    install_requires=dependencies,
+    include_package_data=True,
+    entry_points={
+        'console_scripts': [
+            'pysenteishon=pysenteishon.src.app:main',
+        ],
+    },
+)

@@ -1,0 +1,9 @@
+exclude freeze.py
+graft pysenteishon/src/static
+include *.txt
+include *.rst
+include *.md
+include *.py
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
