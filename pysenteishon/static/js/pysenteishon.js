@@ -75,11 +75,7 @@ function Chronometer ($el) {
 }
 
 
-function Slider ($el) {
-  this.$el = $el;
-  this.doDoing = false;
-
-  this.do = function (key) {
+function press (key) {
     if (this.doDoing) { return }
     this.doDoing = true;
     $.ajax({
@@ -91,7 +87,14 @@ function Slider ($el) {
     }).always(function () {
       this.doDoing = false;
     }.bind(this));
-  };
+}
+
+
+function Slider ($el) {
+  this.$el = $el;
+  this.doDoing = false;
+
+  this.do = function(key) {press(key)};
 
   this.$el.find('#key-left').click(function () {
     this.do("left");
@@ -145,8 +148,25 @@ function NetworkInfo ($el) {
 }
 
 
+function Swipe ($el) {
+  this.$el = $el;
+  this.doDoing = false;
+
+  this.do = function(key) {press(key)};
+
+  this.$el.swipe({
+    swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+      // FIXME: "this.do" doesn't work here and it should :)
+      press(direction);
+    },
+    fingers: 1,
+  });
+}
+
+
 $(function () {
   var chronometer = new Chronometer($('#chronometer'));
   var slider = new Slider($('#slider'));
   var networkInfo = new NetworkInfo($('#network-info'));
+  var swipe = new Swipe($('#container'));
 });
