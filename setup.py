@@ -10,7 +10,7 @@ with open('requirements.txt', 'r') as fh:
 
 setup(
     name='pysenteishon',
-    version='0.3',
+    version='1.0.0b1',
     description='Control your presentations swiping your touchscreen!',
     long_description=open('README.rst').read(),
     url='https://github.com/edvm/pysenteishon',
