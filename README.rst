@@ -21,7 +21,7 @@ From GitHub
 
    git clone https://github.com/edvm/pysenteishon
    cd pysenteishon
-   python pysenteishon/src/app.py
+   python pysenteishon/app.py
 
 Usage
 =====
