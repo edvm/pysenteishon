@@ -16,6 +16,8 @@ setup(
     url='https://github.com/edvm/pysenteishon',
     author='Emiliano Dalla Verde Marcozzi',
     author_email='edvm@fedoraproject.org',
+    maintainer='Manuel Kaufmann',
+    maintainer_email='humitos@gmail.com',
     license='GPLv3',
     classifiers=[
         'Development Status :: 4 - Beta',
