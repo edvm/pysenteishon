@@ -1,4 +1,4 @@
 PyUserInput
 python3-xlib
 netifaces
-cherrypy
+CherryPy

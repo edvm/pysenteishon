@@ -40,7 +40,7 @@ setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'pysenteishon=pysenteishon.src.app:main',
+            'pysenteishon=pysenteishon.app:main',
         ],
     },
 )
