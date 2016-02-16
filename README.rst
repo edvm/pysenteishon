@@ -26,8 +26,8 @@ From GitHub
 Windows
 -------
 
-You also need to install
-[pywin32](https://sourceforge.net/projects/pywin32/) to make it works
+You also need to install `pywin32
+<https://sourceforge.net/projects/pywin32/>`_ to make it works
 properly.
 
 pysenteishon 1.0.0b was tested on Python 3.4.4 running Windows XP
