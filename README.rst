@@ -23,6 +23,17 @@ From GitHub
    cd pysenteishon
    python pysenteishon/app.py
 
+Windows
+-------
+
+You also need to install
+[pywin32](https://sourceforge.net/projects/pywin32/) to make it works
+properly.
+
+pysenteishon 1.0.0b was tested on Python 3.4.4 running Windows XP
+32bits and pywin32 build 220.
+
+
 Usage
 =====
 
