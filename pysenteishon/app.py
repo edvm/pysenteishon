@@ -1,14 +1,21 @@
-import os
 import argparse
+import cherrypy
 import ipaddress
 import netifaces
-import cherrypy
+import os
+import subprocess
+import sys
 
-from pykeyboard import PyKeyboard
 
+ON_MACOS = sys.platform == 'darwin'
+
+if ON_MACOS:
+    MACOS_CMD = "/usr/bin/osascript -e 'tell application \"System Events\" to key code {}'"
+else:
+    from pykeyboard import PyKeyboard
+    k = PyKeyboard()
 
 DEFAULT_PORT = 5000
-k = PyKeyboard()
 
 
 class PySenteishon(object):
@@ -39,7 +46,10 @@ class PySenteishon(object):
         """
         key_to_tap = self.get_key(key)
         if key_to_tap:
-            k.tap_key(key_to_tap)
+            if ON_MACOS:
+                subprocess.run(MACOS_CMD.format(key_to_tap), shell=True)
+            else:
+                k.tap_key(key_to_tap)
             return {"key-pressed": True, "key": key}
         return {"key-pressed": False, "key": None}
 
@@ -61,12 +71,20 @@ class PySenteishon(object):
         return network_info
 
     def get_key(self, path):
-        keys = {
-            'up': k.up_key,
-            'down': k.down_key,
-            'left': k.left_key,
-            'right': k.right_key,
-        }
+        if ON_MACOS:
+            keys = {
+                'up': 126,
+                'down': 125,
+                'left': 123,
+                'right': 124,
+            }
+        else:
+            keys = {
+                'up': k.up_key,
+                'down': k.down_key,
+                'left': k.left_key,
+                'right': k.right_key,
+            }
         return keys.get(path)
 
 
