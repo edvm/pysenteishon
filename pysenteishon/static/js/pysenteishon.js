@@ -6,11 +6,6 @@ function Chronometer ($el) {
   this.lastCheckTime = null;
   this.milliSecondsLeft = 45*60*1000;
 
-  this.notifications = [
-    10,
-    5
-  ];
-
   this.$clock.click(function () {
     this.running = !this.running;
     if (this.running) {
@@ -36,7 +31,6 @@ function Chronometer ($el) {
       this.milliSecondsLeft -= ((new Date()).getTime() - this.lastCheckTime.getTime());
       this.lastCheckTime = new Date();
       this.render();
-      this.checkNotifications();
     }
   }.bind(this), 500);
 
@@ -45,30 +39,6 @@ function Chronometer ($el) {
     var sec = (this.milliSecondsLeft/1000) % 60 << 0;
     sec = ('000'+Math.abs(sec)).slice(-2);
     this.$timeLeft.text(min+":"+sec);
-  };
-
-  this.checkNotifications = function () {
-    // reduced by one to avoid notifying on the end 10:59
-    var min = ((this.milliSecondsLeft/1000/60) << 0) - 1;
-    var len = this.notifications.length;
-    this.notifications = this.notifications.filter(function (time) {
-      return time != min;
-    });
-    if ( len != this.notifications.length ) {
-      // filtered notification have less items, lets notify the user
-      this.notify('Time left '+min);
-    }
-  };
-
-  // notify permission
-  Notification.requestPermission();
-  this.notify = function (text) {
-    if (!('Notification' in window)) {
-      return
-    }
-    if (Notification.permission === 'granted') {
-      new Notification(text);
-    }
   };
 
   this.render();
