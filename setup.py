@@ -5,12 +5,18 @@ from setuptools import setup, find_packages
 if sys.version_info[0] < 3:
     raise Exception('Python 2 version is not supported')
 
-with open('requirements.txt', 'r') as fh:
+if sys.platform == 'darwin':
+    requirements_file = 'requirements.darwin.txt'
+else:
+    requirements_file = 'requirements.txt'
+
+with open(requirements_file, 'r') as fh:
     dependencies = [l.strip() for l in fh]
+
 
 setup(
     name='pysenteishon',
-    version='1.0.0b1',
+    version='1.0.0',
     description='Control your presentations swiping your touchscreen!',
     long_description=open('README.rst').read(),
     url='https://github.com/edvm/pysenteishon',
@@ -20,12 +26,13 @@ setup(
     maintainer_email='humitos@gmail.com',
     license='GPLv3',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Environment :: Web Environment',
         'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Operating System :: Unix',
+        'Operating System :: MacOS',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
