@@ -47,7 +47,7 @@ class PySenteishon(object):
         key_to_tap = self.get_key(key)
         if key_to_tap:
             if ON_MACOS:
-                subprocess.run(MACOS_CMD.format(key_to_tap), shell=True)
+                subprocess.call(MACOS_CMD.format(key_to_tap), shell=True)
             else:
                 k.tap_key(key_to_tap)
             return {"key-pressed": True, "key": key}
