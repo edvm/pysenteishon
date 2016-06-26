@@ -21,6 +21,9 @@ From GitHub
 
    git clone https://github.com/edvm/pysenteishon
    cd pysenteishon
+   python3 -m venv env
+   source env/bin/activate  # (or env\Scripts\activate.bat for Windows)
+   pip install -r requirements.txt  # (or requirements.darwing.txt for MacOS)
    python pysenteishon/app.py
 
 Windows
