@@ -3,6 +3,7 @@ pysenteishon
 
 Control your presentations with the swipe of your finger!
 
+
 Install
 =======
 
@@ -13,6 +14,7 @@ From PyPi
 
    pip install pysenteishon
    pysenteishon
+
 
 From GitHub
 -----------
@@ -25,6 +27,7 @@ From GitHub
    source env/bin/activate  # (or env\Scripts\activate.bat for Windows)
    pip install -r requirements.txt  # (or requirements.darwing.txt for MacOS)
    python pysenteishon/app.py
+
 
 Windows
 -------
@@ -52,12 +55,13 @@ After running the app:
 
 - Swipe on your touchscreen and start your talk! :D
 
+
 Options
 =======
 
 ::
 
-   usage: app.py [-h] [-p PORT] [-a user password]
+   usage: pysenteishon [-h] [-p PORT] [-a user password]
 
    optional arguments:
      -h, --help            show this help message and exit
