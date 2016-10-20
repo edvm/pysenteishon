@@ -11,7 +11,7 @@
 }
 
 body {
-    background: #FFE480;
+    background: #FFEFFF;
 }
 
 .navbar {
@@ -101,4 +101,10 @@ body {
 
 #slider .fa:hover {
     color: #FFE480;
+}
+
+.display {
+	width: 80%;
+	background: white;
+	color: black;
 }
