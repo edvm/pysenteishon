@@ -29,6 +29,16 @@ From GitHub
    python pysenteishon/app.py
 
 
+Using Fades
+-----------
+
+https://github.com/PyAr/fades
+
+::
+
+   fades -d pysenteishon -x pysenteishon 
+
+
 Windows
 -------
 
