@@ -139,4 +139,21 @@ $(function () {
   var slider = new Slider($('#slider'));
   var networkInfo = new NetworkInfo($('#network-info'));
   var swipe = new Swipe($('#container'));
+  var noSleep = new NoSleep();
+  var wakeLockEnabled = false;
+  var toggleEl = document.querySelector("#toggle");
+  var wakeLockEnabled = false;
+  toggleEl.addEventListener('click', function() {
+	  if (!wakeLockEnabled) {
+		  noSleep.enable(); // keep the screen on!
+		  alert('display will be ON');
+		  wakeLockEnabled = true;
+		  toggleEl.value = "I will keep display ON";
+	  } else {
+		  noSleep.disable(); // let the screen turn off.
+		  alert('display will be off');
+		  wakeLockEnabled = false;
+		  toggleEl.value = "Display will turn off auto";
+	  }
+  }, false);
 });
