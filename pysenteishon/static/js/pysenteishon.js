@@ -120,40 +120,104 @@ function NetworkInfo ($el) {
 
 function Swipe ($el) {
   this.$el = $el;
-  this.doDoing = false;
-
-  this.do = function(key) {press(key)};
-
   this.$el.swipe({
     swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-      // FIXME: "this.do" doesn't work here and it should :)
       press(direction);
     },
-    fingers: 1,
+    fingers: 1
   });
 }
 
+function TouchPad ($touchpad) {
+  var promise = $.Deferred().promise();
+  function mouseMove(offset_x, offset_y){
+      if (this.moving) {
+        return promise
+      }
+      this.moving = true;
+      return $.ajax({
+        url: "/mouse_move",
+        data: {
+          "offset_x": parseInt(offset_x),
+          "offset_y": parseInt(offset_y)
+        },
+        cache: false
+      }).always(function () {
+        this.moving = false;
+      }.bind(this));
+  }
+
+  function mouseClick (){
+      if (this.doing) { return }
+      this.doing = true;
+      return $.ajax({
+        url: "/click",
+        cache: false
+      }).always(function () {
+        this.doing = false;
+      }.bind(this));
+  }
+
+  var start_posx = 0;
+  var start_posy = 0;
+  var current_posx = 0;
+  var current_posy = 0;
+
+  $touchpad.on("touchstart", function(e){
+    start_posx = e.originalEvent.touches[0].pageX;
+    start_posy = e.originalEvent.touches[0].pageY;
+    current_posx = start_posx;
+    current_posy = start_posy;
+  });
+
+  $touchpad.on("touchend", function(e){
+    if ((current_posx - start_posx + current_posx - start_posx) == 0) {
+      mouseClick()
+    } else {
+      mouseMove(
+        current_posx - start_posx,
+        current_posy - start_posy
+      )
+    }
+  });
+
+  $touchpad.on("touchmove", function(e){
+    e.preventDefault(); // prevent scroll on mobile screens
+    current_posx = e.originalEvent.touches[0].pageX;
+    current_posy = e.originalEvent.touches[0].pageY;
+    var last_posx = current_posx;
+    var last_posy = current_posy;
+    mouseMove(
+      current_posx - start_posx,
+      current_posy - start_posy
+    ).done(function(){
+        start_posx = last_posx;
+        start_posy = last_posy;
+    })
+  });
+}
 
 $(function () {
   var chronometer = new Chronometer($('#chronometer'));
   var slider = new Slider($('#slider'));
   var networkInfo = new NetworkInfo($('#network-info'));
-  var swipe = new Swipe($('#container'));
+  var swipe = new Swipe($('#slider'));
+  var touchPad = new TouchPad($('#touchpad'));
+
   var noSleep = new NoSleep();
+
   var wakeLockEnabled = false;
   var toggleEl = document.querySelector("#toggle");
-  var wakeLockEnabled = false;
   toggleEl.addEventListener('click', function() {
-	  if (!wakeLockEnabled) {
-		  noSleep.enable(); // keep the screen on!
-		  alert('display will be ON');
-		  wakeLockEnabled = true;
-		  toggleEl.value = "I will keep display ON";
-	  } else {
-		  noSleep.disable(); // let the screen turn off.
-		  alert('display will be off');
-		  wakeLockEnabled = false;
-		  toggleEl.value = "Display will turn off auto";
-	  }
+    if (!wakeLockEnabled) {
+      noSleep.enable(); // keep the screen on!
+      wakeLockEnabled = true;
+      toggleEl.value = "Screen won't turn off";
+    } else {
+      noSleep.disable(); // let the screen turn off.
+      wakeLockEnabled = false;
+      toggleEl.value = "Screen will turn off";
+    }
   }, false);
+
 });

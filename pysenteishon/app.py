@@ -13,7 +13,9 @@ if ON_MACOS:
     MACOS_CMD = "/usr/bin/osascript -e 'tell application \"System Events\" to key code {}'"
 else:
     from pykeyboard import PyKeyboard
-    k = PyKeyboard()
+    keyboard = PyKeyboard()
+    from pymouse import PyMouse
+    mouse = PyMouse()
 
 DEFAULT_PORT = 5000
 
@@ -24,6 +26,28 @@ class PySenteishon(object):
     def index(self):
         """Redirect to index.html"""
         raise cherrypy.HTTPRedirect("/index.html")
+
+    @cherrypy.expose
+    def mouse_move(self, offset_x=0, offset_y=0, *args, **kwargs):
+        if ON_MACOS:
+           #TODO find out how to do this
+            pass
+        else:
+            x, y = mouse.position()
+            mouse.move(
+                x+int(offset_x),
+                y+int(offset_y)
+            )
+        return ""
+
+    @cherrypy.expose
+    def click(self, *args, **kwargs):
+        if ON_MACOS:
+           #TODO find out how to do this
+            pass
+        else:
+            mouse.click(*mouse.position())
+        return ""
 
     @cherrypy.expose
     @cherrypy.tools.json_out()
@@ -49,7 +73,7 @@ class PySenteishon(object):
             if ON_MACOS:
                 subprocess.call(MACOS_CMD.format(key_to_tap), shell=True)
             else:
-                k.tap_key(key_to_tap)
+                keyboard.tap_key(key_to_tap)
             return {"key-pressed": True, "key": key}
         return {"key-pressed": False, "key": None}
 
@@ -80,10 +104,10 @@ class PySenteishon(object):
             }
         else:
             keys = {
-                'up': k.up_key,
-                'down': k.down_key,
-                'left': k.left_key,
-                'right': k.right_key,
+                'up': keyboard.up_key,
+                'down': keyboard.down_key,
+                'left': keyboard.left_key,
+                'right': keyboard.right_key,
             }
         return keys.get(path)
 

@@ -103,8 +103,14 @@ body {
     color: #FFE480;
 }
 
-.display {
-	width: 80%;
-	background: white;
-	color: black;
+.toucharea{
+    height: 50vh;
+    max-height: 50vw;
+    background: repeating-linear-gradient(
+            -45deg,
+            rgba(34, 34, 34, 0.15),
+            rgba(34, 34, 34, 0.15) 10px,
+            #5784ab 10px,
+            #5784ab 20px
+    );
 }
