@@ -104,8 +104,8 @@ body {
 }
 
 .toucharea{
-    height: 50vh;
-    max-height: 50vw;
+    height: 80vh;
+    max-height: 80vw;
     background: repeating-linear-gradient(
             -45deg,
             rgba(34, 34, 34, 0.15),
