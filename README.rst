@@ -36,7 +36,7 @@ https://github.com/PyAr/fades
 
 ::
 
-   fades -d pysenteishon -x pysenteishon 
+   fades -d pysenteishon -x pysenteishon
 
 
 Windows
@@ -78,3 +78,4 @@ Options
      -p PORT, --port PORT  Listen on port
      -a user password, --auth user password
                            Basic auth
+      -v , --version       print PySenteishon version
