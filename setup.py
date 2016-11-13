@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import sys
 from setuptools import setup, find_packages
 
@@ -16,7 +19,7 @@ with open(requirements_file, 'r') as fh:
 
 setup(
     name='pysenteishon',
-    version='1.0.0',
+    version='1.1.0',
     description='Control your presentations swiping your touchscreen!',
     long_description=open('README.rst').read(),
     url='https://github.com/edvm/pysenteishon',
