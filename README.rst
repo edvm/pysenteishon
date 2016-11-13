@@ -78,4 +78,4 @@ Options
      -p PORT, --port PORT  Listen on port
      -a user password, --auth user password
                            Basic auth
-      -v , --version       print PySenteishon version
+     -v , --version       print PySenteishon version
