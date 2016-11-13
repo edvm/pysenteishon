@@ -6,6 +6,7 @@ import os
 import subprocess
 import sys
 
+VERSION = "1.0.0b"
 
 ON_MACOS = sys.platform == 'darwin'
 
@@ -128,6 +129,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--port', type=int, default=DEFAULT_PORT, help="Listen on port")
     parser.add_argument('-a', '--auth', nargs=2, metavar=('user', 'password'), help="Basic auth")
+    parser.add_argument('-v', '--version', action='version',
+                        version='%(prog)s {}'.format(VERSION), help='print PySenteishon version')
     args = parser.parse_args()
 
     def validate_password(realm, user, password):
@@ -151,6 +154,9 @@ def main():
             'tools.auth_basic.checkpassword': validate_password,
         })
     cherrypy.quickstart(PySenteishon(), '/', conf)
+
+    if args.version:
+        print(VERSION)
 
 if __name__ == '__main__':
     main()
