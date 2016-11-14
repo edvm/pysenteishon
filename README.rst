@@ -71,11 +71,11 @@ Options
 
 ::
 
-   usage: pysenteishon [-h] [-p PORT] [-a user password]
+   usage: pysenteishon [-h] [-p PORT] [-a user password] [--version]
 
    optional arguments:
      -h, --help            show this help message and exit
      -p PORT, --port PORT  Listen on port
      -a user password, --auth user password
                            Basic auth
-     -v , --version       print PySenteishon version
+     --version             print PySenteishon version and exit
