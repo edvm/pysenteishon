@@ -5,8 +5,8 @@ import netifaces
 import os
 import subprocess
 import sys
+import __init__ as pysenteishon
 
-VERSION = "1.0.0b"
 
 ON_MACOS = sys.platform == 'darwin'
 
@@ -126,11 +126,12 @@ def get_network_interface_list():
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog=pysenteishon.__prj__)
     parser.add_argument('-p', '--port', type=int, default=DEFAULT_PORT, help="Listen on port")
     parser.add_argument('-a', '--auth', nargs=2, metavar=('user', 'password'), help="Basic auth")
-    parser.add_argument('-v', '--version', action='version',
-                        version='%(prog)s {}'.format(VERSION), help='print PySenteishon version')
+    parser.add_argument('--version', action='version',
+                        version='%(prog)s {}'.format(pysenteishon.__version__),
+                        help='print PySenteishon version and exit')
     args = parser.parse_args()
 
     def validate_password(realm, user, password):
@@ -154,9 +155,6 @@ def main():
             'tools.auth_basic.checkpassword': validate_password,
         })
     cherrypy.quickstart(PySenteishon(), '/', conf)
-
-    if args.version:
-        print(VERSION)
 
 if __name__ == '__main__':
     main()
