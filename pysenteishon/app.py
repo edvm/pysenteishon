@@ -1,3 +1,6 @@
+from ws4py.server.cherrypyserver import WebSocketPlugin, WebSocketTool
+from ws4py.websocket import EchoWebSocket
+
 import argparse
 import cherrypy
 import ipaddress
@@ -27,6 +30,11 @@ class PySenteishon(object):
     def index(self):
         """Redirect to index.html"""
         raise cherrypy.HTTPRedirect("/index.html")
+
+    @cherrypy.expose
+    def slides(self):
+        # you can access the class instance through
+        handler = cherrypy.request.ws_handler
 
     @cherrypy.expose
     def mouse_move(self, offset_x=0, offset_y=0, *args, **kwargs):
@@ -153,6 +161,17 @@ def main():
             'tools.auth_basic.realm': 'pysenteishon',
             'tools.auth_basic.checkpassword': validate_password,
         })
+
+    # Websocket server support
+    WebSocketPlugin(cherrypy.engine).subscribe()
+    cherrypy.tools.websocket = WebSocketTool()
+    conf.update({
+        '/slides': {
+            'tools.websocket.on': True,
+            'tools.websocket.handler_cls': EchoWebSocket
+        }
+    })
+
     cherrypy.quickstart(PySenteishon(), '/', conf)
 
     if args.version:
