@@ -10,7 +10,6 @@ import netifaces
 import os
 import subprocess
 import sys
-from plugins.qrgenerator import qr_to_terminal
 
 VERSION = "1.0.0b"
 DEFAULT_PORT = 5000
@@ -92,6 +91,9 @@ class PySenteishon(object):
                 subprocess.call(MACOS_CMD.format(key_to_tap), shell=True)
             else:
                 keyboard.tap_key(key_to_tap)
+
+            self.run_plugins(plugins.ON_TAP_KEY)
+
             return {"key-pressed": True, "key": key}
         return {"key-pressed": False, "key": None}
 
@@ -137,8 +139,6 @@ class PySenteishon(object):
                 'right': keyboard.right_key,
             }
 
-        self.run_plugins(plugins.ON_TAP_KEY)
-
         return keys.get(path)
 
 
@@ -178,7 +178,8 @@ def main():
         name_text = iface['name']
 
         if args.qr:
-            qr_to_terminal(ip_text)
+            qr_plugin = plugins.QRConsoleGenerator()
+            qr_plugin.execute(ip_text)
 
         print("Connect your smartphone web browser to: {0} - {1}\n".format(ip_text, name_text))
 

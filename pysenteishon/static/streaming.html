@@ -20,8 +20,10 @@
             ws = new ReconnectingWebSocket(websocket, null, {maxReconnectInterval:3000});
           
             ws.onmessage = function (evt) {
-                json = JSON.parse(evt.data)
-                $("current-slide").attr("src", json.image)
+                console.log(evt);
+                e = evt;
+                imageUrl = JSON.parse(evt.data).image;
+                $("#current-slide").attr("src", imageUrl);
             };
 
         });
