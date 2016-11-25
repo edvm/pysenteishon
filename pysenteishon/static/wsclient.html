@@ -20,14 +20,8 @@
             ws = new ReconnectingWebSocket(websocket, null, {maxReconnectInterval:3000});
           
             ws.onmessage = function (evt) {
-                 e = evt
-                 console.log(evt)
+                $("current-slide").attr("src", evt.data.image)
             };
-
-            ws.onopen = function() {
-                
-            };
-
         });
       </script>
 </body>
