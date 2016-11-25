@@ -10,6 +10,7 @@ import netifaces
 import os
 import subprocess
 import sys
+from plugins.qrgenerator import qr_to_terminal
 
 VERSION = "1.0.0b"
 DEFAULT_PORT = 5000
@@ -35,14 +36,14 @@ class PySenteishon(object):
         raise cherrypy.HTTPRedirect("/index.html")
 
     @cherrypy.expose
-    def ws(self):
-        """Redirect to wsclient.html"""
-        raise cherrypy.HTTPRedirect("/wsclient.html")
+    def streaming(self):
+        """Redirect to streaming.html"""
+        raise cherrypy.HTTPRedirect("/streaming.html")
 
     @cherrypy.expose
     def slides(self):
         # you can access the class instance through
-        handler = cherrypy.request.ws_handler
+        handler = cherrypy.request.ws_handler  # noqa
 
     @cherrypy.expose
     def mouse_move(self, offset_x=0, offset_y=0, *args, **kwargs):
@@ -169,11 +170,17 @@ def main():
     parser.add_argument('-a', '--auth', nargs=2, metavar=('user', 'password'), help="Basic auth")
     parser.add_argument('-v', '--version', action='version',
                         version='%(prog)s {}'.format(VERSION), help='print PySenteishon version')
+    parser.add_argument('--qr', action="store_true", help="Print QR code in terminal")
     args = parser.parse_args()
 
-    print('Connect your smartphone web browser to:')
     for iface in get_network_interface_list():
-        print("http://{}:{} - {}".format(iface['addresses'][0], args.port, iface['name']))
+        ip_text = "http://{0}:{1}".format(iface['addresses'][0], args.port)
+        name_text = iface['name']
+
+        if args.qr:
+            qr_to_terminal(ip_text)
+
+        print("Connect your smartphone web browser to: {0} - {1}\n".format(ip_text, name_text))
 
     def validate_password(realm, user, password):
         return args.auth[0] == user and args.auth[1] == password
