@@ -1,5 +1,5 @@
 PyUserInput
 python3-xlib
 netifaces
-CherryPy
+CherryPy>3.2.2
 ipaddress
