@@ -1,5 +1,7 @@
 from ws4py.server.cherrypyserver import WebSocketPlugin, WebSocketTool
-from ws4py.websocket import EchoWebSocket
+from ws4py.websocket import WebSocket
+from ws4py.messaging import TextMessage
+from pysenteishon import plugins
 
 import argparse
 import cherrypy
@@ -10,7 +12,7 @@ import subprocess
 import sys
 
 VERSION = "1.0.0b"
-
+DEFAULT_PORT = 5000
 ON_MACOS = sys.platform == 'darwin'
 
 if ON_MACOS:
@@ -20,8 +22,6 @@ else:
     keyboard = PyKeyboard()
     from pymouse import PyMouse
     mouse = PyMouse()
-
-DEFAULT_PORT = 5000
 
 
 class PySenteishon(object):
@@ -118,7 +118,18 @@ class PySenteishon(object):
                 'left': keyboard.left_key,
                 'right': keyboard.right_key,
             }
+        plugins.take_screenshot()
         return keys.get(path)
+
+
+class WebSocketHandler(WebSocket):
+
+    def received_message(self, m):
+        print('LLEGO MENSAJE! {}'.format(m))
+        cherrypy.engine.publish('/slides', m)
+
+    def closed(self, code, reason="A user left pysenteishon, seems the talk is too boring :("):
+        cherrypy.engine.publish('/slides', TextMessage(reason))
 
 
 def get_network_interface_list():
@@ -172,7 +183,7 @@ def main():
     conf.update({
         '/slides': {
             'tools.websocket.on': True,
-            'tools.websocket.handler_cls': EchoWebSocket
+            'tools.websocket.handler_cls': WebSocketHandler
         }
     })
 
@@ -180,5 +191,7 @@ def main():
 
     if args.version:
         print(VERSION)
+
+
 if __name__ == '__main__':
     main()
