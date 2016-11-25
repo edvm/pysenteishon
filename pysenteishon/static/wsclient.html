@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PYSENTEISHON WS</title>
+</head>
+<body>  
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/qrcode.min.js"></script>
+    <script type="text/javascript" src="js/nosleep.js"></script>
+    <script type="text/javascript" src="js/reconnecting-websocket.min.js"></script>
+
+    <img id="current-slide" src="">
+
+    <script type='application/javascript'>
+        $(document).ready(function() {
+            websocket = 'ws://' + window.location.host + '/slides';
+            ws = new ReconnectingWebSocket(websocket, null, {maxReconnectInterval:3000});
+          
+            ws.onmessage = function (evt) {
+                 e = evt
+                 console.log(evt)
+            };
+
+            ws.onopen = function() {
+                
+            };
+
+        });
+      </script>
+</body>
+</html>
