@@ -5,6 +5,7 @@ import netifaces
 import os
 import subprocess
 import sys
+from plugins.qrgenerator import qr_to_terminal
 
 VERSION = "1.0.0b"
 
@@ -131,12 +132,18 @@ def main():
     parser.add_argument('-a', '--auth', nargs=2, metavar=('user', 'password'), help="Basic auth")
     parser.add_argument('-v', '--version', action='version',
                         version='%(prog)s {}'.format(VERSION), help='print PySenteishon version')
+    parser.add_argument('-qr', '--qr', nargs='?', help="Print QR code in terminal")
     args = parser.parse_args()
 
     print('Connect your smartphone web browser to:')
     for iface in get_network_interface_list():
-        print("http://{}:{} - {}".format(iface['addresses'][0], args.port, iface['name']))
-
+        ip_text = "http://{0}:{1}".format(iface['addresses'][0], args.port)
+        name_text = iface['name']
+        print("{0} - {1}".format(ip_text, name_text))
+        if args.qr:
+            qr_to_terminal(ip_text)
+        #print("http://{}:{} - {}".format(iface['addresses'][0], args.port, iface['name']))
+        
     def validate_password(realm, user, password):
         return args.auth[0] == user and args.auth[1] == password
 
