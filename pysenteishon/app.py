@@ -1,3 +1,6 @@
+from ws4py.server.cherrypyserver import WebSocketPlugin, WebSocketTool
+from ws4py.websocket import EchoWebSocket
+
 import argparse
 import cherrypy
 import ipaddress
@@ -30,22 +33,32 @@ class PySenteishon(object):
         raise cherrypy.HTTPRedirect("/index.html")
 
     @cherrypy.expose
+    def ws(self):
+        """Redirect to wsclient.html"""
+        raise cherrypy.HTTPRedirect("/wsclient.html")
+
+    @cherrypy.expose
+    def slides(self):
+        # you can access the class instance through
+        handler = cherrypy.request.ws_handler
+
+    @cherrypy.expose
     def mouse_move(self, offset_x=0, offset_y=0, *args, **kwargs):
         if ON_MACOS:
-           #TODO find out how to do this
+            # TODO find out how to do this
             pass
         else:
             x, y = mouse.position()
             mouse.move(
-                x+int(offset_x),
-                y+int(offset_y)
+                x + int(offset_x),
+                y + int(offset_y)
             )
         return ""
 
     @cherrypy.expose
     def click(self, *args, **kwargs):
         if ON_MACOS:
-           #TODO find out how to do this
+            # TODO find out how to do this
             pass
         else:
             mouse.click(*mouse.position())
@@ -155,15 +168,28 @@ def main():
     conf = {
         '/': {
             'tools.staticdir.on': True,
-            'tools.staticdir.dir': os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+            'tools.staticdir.dir': os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "static")
         }
     }
+
     if args.auth is not None:
         conf['/'].update({
             'tools.auth_basic.on': True,
             'tools.auth_basic.realm': 'pysenteishon',
             'tools.auth_basic.checkpassword': validate_password,
         })
+
+    # Websocket server support
+    WebSocketPlugin(cherrypy.engine).subscribe()
+    cherrypy.tools.websocket = WebSocketTool()
+    conf.update({
+        '/slides': {
+            'tools.websocket.on': True,
+            'tools.websocket.handler_cls': EchoWebSocket
+        }
+    })
+
     cherrypy.quickstart(PySenteishon(), '/', conf)
 
     if args.version:
