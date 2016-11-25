@@ -114,3 +114,26 @@ body {
             #5784ab 20px
     );
 }
+
+
+.bg-image {
+    position: relative;
+}
+.bg-image img {
+    display: block;
+    width: 100%;
+    max-width: 1200px; /* corresponds to max height of 450px */
+    margin: 0 auto;
+}
+.bg-image h1 {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+}
+.nav, .main {
+    background-color: #f6f6f6;
+    text-align: center;
+}

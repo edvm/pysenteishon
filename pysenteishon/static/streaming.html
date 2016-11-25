@@ -3,27 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>PYSENTEISHON WS</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>  
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/qrcode.min.js"></script>
     <script type="text/javascript" src="js/nosleep.js"></script>
     <script type="text/javascript" src="js/reconnecting-websocket.min.js"></script>
 
-    <img id="current-slide" src="">
+    <div class="bg-image">
+        <img id="current-slide" class="" src="">
+    </div>
+
+    
 
     <script type='application/javascript'>
-        $(document).ready(function() {
+        $(function() {
             websocket = 'ws://' + window.location.host + '/slides';
             ws = new ReconnectingWebSocket(websocket, null, {maxReconnectInterval:3000});
           
-            ws.onmessage = function (evt) {
-                console.log(evt);
-                e = evt;
+            ws.onmessage = function (evt) {;
                 imageUrl = JSON.parse(evt.data).image;
                 $("#current-slide").attr("src", imageUrl);
+
             };
 
         });
