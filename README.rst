@@ -7,6 +7,11 @@ Control your presentations with the swipe of your finger!
 Install
 =======
 
+Requirements
+------------
+
+Make sure you have python3-dev installed
+
 From PyPi
 ----------
 

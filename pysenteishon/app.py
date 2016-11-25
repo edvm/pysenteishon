@@ -141,6 +141,10 @@ def main():
                         version='%(prog)s {}'.format(VERSION), help='print PySenteishon version')
     args = parser.parse_args()
 
+    print('Connect your smartphone web browser to:')
+    for iface in get_network_interface_list():
+        print("http://{}:{} - {}".format(iface['addresses'][0], args.port, iface['name']))
+
     def validate_password(realm, user, password):
         return args.auth[0] == user and args.auth[1] == password
 
@@ -176,6 +180,5 @@ def main():
 
     if args.version:
         print(VERSION)
-
 if __name__ == '__main__':
     main()
