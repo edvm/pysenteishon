@@ -26,6 +26,9 @@ else:
 
 class PySenteishon(object):
 
+    def __init__(self, plugins=None):
+        self.plugins = plugins or {}
+
     @cherrypy.expose
     def index(self):
         """Redirect to index.html"""
@@ -108,6 +111,15 @@ class PySenteishon(object):
         network_info = get_network_interface_list()
         return network_info
 
+    def run_plugins(self, event_name):
+        if self.plugins.get(event_name):
+            for plugin in self.plugins.get(event_name):
+                try:
+                    plugin_instance = plugin()
+                    plugin_instance.execute()
+                except Exception as exc:
+                    print(exc)
+
     def get_key(self, path):
         if ON_MACOS:
             keys = {
@@ -123,7 +135,9 @@ class PySenteishon(object):
                 'left': keyboard.left_key,
                 'right': keyboard.right_key,
             }
-        plugins.take_screenshot()
+
+        self.run_plugins(plugins.ON_TAP_KEY)
+
         return keys.get(path)
 
 
@@ -194,7 +208,11 @@ def main():
         }
     })
 
-    cherrypy.quickstart(PySenteishon(), '/', conf)
+    cherrypy.quickstart(
+        PySenteishon(plugins={
+            plugins.ON_TAP_KEY: [plugins.Screenshot],
+        }), '/', conf
+    )
 
     if args.version:
         print(VERSION)
