@@ -3,3 +3,4 @@ python3-xlib
 netifaces
 CherryPy>3.2.2
 ipaddress
+ws4py
