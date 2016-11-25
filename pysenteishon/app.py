@@ -33,9 +33,9 @@ class PySenteishon(object):
         raise cherrypy.HTTPRedirect("/index.html")
 
     @cherrypy.expose
-    def ws(self):
-        """Redirect to wsclient.html"""
-        raise cherrypy.HTTPRedirect("/wsclient.html")
+    def streaming(self):
+        """Redirect to streaming.html"""
+        raise cherrypy.HTTPRedirect("/streaming.html")
 
     @cherrypy.expose
     def slides(self):
