@@ -4,14 +4,11 @@ import uuid
 import tempfile
 import cherrypy
 import pysenteishon
+import pyscreenshot as ImageGrab
 
 from functools import lru_cache
 from pysenteishon.plugins.base import PysenteishonPlugin
 
-try:
-    import pyscreenshot as ImageGrab
-except ImportError:
-    print("Need to install pyscreenshot.")
 
 
 class Screenshot(PysenteishonPlugin):
