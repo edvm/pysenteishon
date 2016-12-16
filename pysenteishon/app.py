@@ -171,15 +171,22 @@ def main():
     parser.add_argument('-v', '--version', action='version',
                         version='%(prog)s {}'.format(VERSION), help='print PySenteishon version')
     parser.add_argument('--qr', action="store_true", help="Print QR code in terminal")
+    parser.add_argument('--qr-guests', action="store_true", help="Print QR code for Guests in terminal")
     args = parser.parse_args()
 
     for iface in get_network_interface_list():
-        ip_text = "http://{0}:{1}".format(iface['addresses'][0], args.port)
+        ip_text = "{0}:{1}".format(iface['addresses'][0], args.port)
         name_text = iface['name']
 
         if args.qr:
             qr_plugin = plugins.QRConsoleGenerator()
             qr_plugin.execute(ip_text)
+
+        if args.qr_guests:
+            qr_plugin = plugins.QRConsoleGenerator()
+            data = 'http://{}/streaming'.format(ip_text)
+            qr_plugin.execute(data)
+            return
 
         print("Connect your smartphone web browser to: {0} - {1}\n".format(ip_text, name_text))
 
