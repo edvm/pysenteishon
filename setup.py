@@ -3,6 +3,7 @@
 
 import sys
 from setuptools import setup, find_packages
+import pysenteishon
 
 
 if sys.version_info[0] < 3:
@@ -18,16 +19,16 @@ with open(requirements_file, 'r') as fh:
 
 
 setup(
-    name='pysenteishon',
-    version='1.1.0',
+    name=pysenteishon.__prj__,
+    version=pysenteishon.__version__,
     description='Control your presentations swiping your touchscreen!',
     long_description=open('README.rst').read(),
     url='https://github.com/edvm/pysenteishon',
-    author='Emiliano Dalla Verde Marcozzi',
-    author_email='edvm@fedoraproject.org',
+    author=pysenteishon.__author__,
+    author_email=pysenteishon.__email__,
     maintainer='Manuel Kaufmann',
     maintainer_email='humitos@gmail.com',
-    license='GPLv3',
+    license=pysenteishon.__license__,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
