@@ -10,8 +10,9 @@ import netifaces
 import os
 import subprocess
 import sys
+from . import (__version__, __prj__)
 
-VERSION = "1.0.0b"
+
 DEFAULT_PORT = 5000
 ON_MACOS = sys.platform == 'darwin'
 
@@ -86,6 +87,7 @@ class PySenteishon(object):
             {"key-pressed": true, "key": "left"}
         """
         key_to_tap = self.get_key(key)
+
         if key_to_tap:
             if ON_MACOS:
                 subprocess.call(MACOS_CMD.format(key_to_tap), shell=True)
@@ -93,8 +95,8 @@ class PySenteishon(object):
                 keyboard.tap_key(key_to_tap)
 
             self.run_plugins(plugins.ON_TAP_KEY)
-
             return {"key-pressed": True, "key": key}
+
         return {"key-pressed": False, "key": None}
 
     @cherrypy.expose(alias='ifconfig')
@@ -165,13 +167,14 @@ def get_network_interface_list():
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog=__prj__)
     parser.add_argument('-p', '--port', type=int, default=DEFAULT_PORT, help="Listen on port")
     parser.add_argument('-a', '--auth', nargs=2, metavar=('user', 'password'), help="Basic auth")
-    parser.add_argument('-v', '--version', action='version',
-                        version='%(prog)s {}'.format(VERSION), help='print PySenteishon version')
     parser.add_argument('--qr', action="store_true", help="Print QR code in terminal")
     parser.add_argument('--qr-guests', action="store_true", help="Print QR code for Guests in terminal")
+    parser.add_argument('-v', '--version', action='version',
+                        version='%(prog)s {}'.format(__version__),
+                        help='Print PySenteishon version and exit')
     args = parser.parse_args()
 
     for iface in get_network_interface_list():
@@ -229,9 +232,8 @@ def main():
         }), '/', conf
     )
 
-    if args.version:
-        print(VERSION)
-
+    # if args.version:
+    #     print(VERSION)
 
 if __name__ == '__main__':
     main()

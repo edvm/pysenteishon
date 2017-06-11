@@ -31,6 +31,7 @@ From GitHub
    python3 -m venv env
    source env/bin/activate  # (or env\Scripts\activate.bat for Windows)
    pip install -r requirements.txt  # (or requirements.darwing.txt for MacOS)
+   python setup.py develop
    python pysenteishon/app.py
 
 
@@ -76,11 +77,11 @@ Options
 
 ::
 
-   usage: pysenteishon [-h] [-p PORT] [-a user password]
+   usage: pysenteishon [-h] [-p PORT] [-a user password] [--version]
 
    optional arguments:
      -h, --help            show this help message and exit
      -p PORT, --port PORT  Listen on port
      -a user password, --auth user password
                            Basic auth
-     -v , --version       print PySenteishon version
+     --version             print PySenteishon version and exit
